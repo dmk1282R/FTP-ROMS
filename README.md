@@ -18,7 +18,7 @@
 👤 **Roy The Arsonist**
 
 * Website: https://roythearsonist.github.io/
-* Twitter: [@the\_blob\_scp](https://twitter.com/the\_blob\_scp)
+* Twitter: [@roythearsonist](https://twitter.com/roythearsonist)
 * Github: [@roythearsonist](https://github.com/roythearsonist)
 
 ## Show your support
