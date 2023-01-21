@@ -4,9 +4,6 @@
   <a href="#" target="_blank">
     <img alt="License: GNU General Public License v3.0" src="https://img.shields.io/badge/License-GNU General Public License v3.0-yellow.svg" />
   </a>
-  <a href="https://twitter.com/the\_blob\_scp" target="_blank">
-    <img alt="Twitter: the\_blob\_scp" src="https://img.shields.io/twitter/follow/the\_blob\_scp.svg?style=social" />
-  </a>
 </p>
 
 > FTP (Free the iPad) is a website for running your old games on your Apple device.
