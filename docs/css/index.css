@@ -1,10 +1,7 @@
 body {
-	background-color: #282b30;
-	max-width: 1120;
+background-color: #282b30;
 }
-h1 {
-	color: red;
-}
+
 .ddcolortabs{
 	position: fixed; /* Make it stick/fixed */
 	top: 15; /* Stay on top */
@@ -35,15 +32,17 @@ text-transform:uppercase;
 float: left;
 font-size: 16px;
 color: red;
-text-align: center;
+background: black no-repeat left top;
+margin:0 2px 0 0;
 padding:0 0 1px 3px;
-text-decoration: none;
+text-decoration:none;
+letter-spacing: 1px;
 }
 
 .ddcolortabs a span{
 float:left;
 display:block;
-background: black no-repeat right top;
+background: transparent no-repeat right top;
 padding: 4px 8px 2px 7px;
 }
 
@@ -63,6 +62,15 @@ background-color: #591f20;
 background-color: #591f20;
 }
 
+.ddcolortabsline{
+clear: both;
+padding: 0;
+width: 100%;
+height: 8px;
+line-height: 8px;
+background: black;
+border-top: 1px solid red; /*Remove this to remove border between bar and tabs*/
+}
 
 /* ######### Style for Drop Down Menu ######### */
 
@@ -106,44 +114,44 @@ color: black;
 
 @media screen and (max-width: 480px){
 
-	.ddcolortabs{
-		overflow: hidden;
-	}
+.ddcolortabs{
+	overflow: hidden;
+}
 
-	.ddcolortabs li{
-		display: block !important;
-		width: 100%;
-		margin: 0;
-	}
+.ddcolortabs li{
+	display: block !important;
+	width: 100%;
+	margin: 0;
+}
 
-	.ddcolortabs li a{
-		display: block;
-		padding: 10px auto;
-		font-size: 120%;
-		margin-top: 3px;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
+.ddcolortabs li a{
+	display: block;
+	padding: 10px auto;
+	font-size: 120%;
+	margin-top: 3px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
-	.ddcolortabsline{
-		display: none;
-	}
+.ddcolortabsline{
+	display: none;
+}
 
-	.dropmenudiv_a{
-		width: 100% !important;
-		display: none;
-		position: static;
-		border-top-width: 1px;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-	
-	 .dropmenudiv_a a{
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
+.dropmenudiv_a{
+	width: 100% !important;
+	display: none;
+	position: static;
+	border-top-width: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+	.dropmenudiv_a a{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
 }
