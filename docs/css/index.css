@@ -1,13 +1,19 @@
 body {
 	background-color: #282b30;
+	max-width: 1120;
 }
-
+h1 {
+	color: red;
+}
 .ddcolortabs{
-padding: 0;
-width: 100%;
-background: transparent;
-voice-family: "\"}\"";
-voice-family: inherit;
+	position: fixed; /* Make it stick/fixed */
+	top: 15; /* Stay on top */
+	width: auto; /* Full width */
+	transition: top 0.3s; /* Transition effect when sliding down (and up) */
+	font-family: Bold;
+	padding-left: auto;
+	padding-right: auto;
+	width: 16em;
 }
 
 .ddcolortabs ul{
@@ -15,27 +21,31 @@ font: normal 11px Arial, Verdana, sans-serif;
 margin:0;
 padding:0;
 list-style:none;
+
 }
 
 .ddcolortabs li{
 display:inline;
+margin:0 2px 0 0;
+padding:0;
 text-transform:uppercase;
+
 }
 
 
 .ddcolortabs a{
-float:left;
+float: left;
+font-size: 16px;
 color: red;
-background: black url(media/color_tabs_left.gif) no-repeat left top;
-margin:0 2px 0 0;
+text-align: center;
 padding:0 0 1px 3px;
-text-decoration:none;
-letter-spacing: 1px;
+text-decoration: none;
 }
 
 .ddcolortabs a span{
+float:left;
 display:block;
-background: transparent url(media/color_tabs_right.gif) no-repeat right top;
+background: black no-repeat right top;
 padding: 4px 8px 2px 7px;
 }
 
