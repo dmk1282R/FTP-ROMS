@@ -1,0 +1,70 @@
+body {
+  background-color: #282b30;
+}
+
+/* Navbar Container */
+#navbar {
+    background-color: #16171a; /* Black background color */
+    position: fixed; /* Make it stick/fixed */
+    top: 15; /* Stay on top */
+    width: auto; /* Full width */
+    transition: top 0.3s; /* Transition effect when sliding down (and up) */
+    font-family: Bold;
+  }
+  
+  /* Links inside the navbar */
+  #navbar a {
+    float: left;
+    font-size: 16px;
+    color: red;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+  }
+  
+  /* Quick Links */
+  #dropbtn {
+    background-color: inherit;
+    color: red;
+    padding:14px 16px;
+    font-size: 16px;
+    border: none;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  /* Position for <div> content */
+  #dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  /* Hides Dropdown content by default */
+  #dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    box-shadow: 0px 8px 6 px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links in the dropdown */
+  #dropdown-content a {
+    float: none;
+    color: red;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 24px;
+  }
+  
+  /* Change color of dropdown links on hover */
+  #dropdown-content a:hover {background-color: #393e46;}
+  
+  /* Show the dropdown menu on hover */
+  #dropdown:hover #dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  #dropdown:hover #dropbtn {background-color: black;
+  }
