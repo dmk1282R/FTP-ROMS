@@ -14,13 +14,14 @@
 
 👤 **Roy The Arsonist**
 
-* Website: https://roythearsonist.github.io/
-* Twitter: [@roythearsonist](https://twitter.com/roythearsonist)
-* Github: [@roythearsonist](https://github.com/roythearsonist)
+- Website: https://roythearsonist.github.io/
+- Twitter: [@roythearsonist](https://twitter.com/roythearsonist)
+- Github: [@roythearsonist](https://github.com/roythearsonist)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
