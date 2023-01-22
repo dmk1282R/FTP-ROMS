@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> FTP (Free the iPad) is a website for running your old games on your Apple device.
+> FTP (Free the iPad) is a website for running your old games on your (Apple) device.
 
 ### 🏠 [Homepage](https://roythearsonist.github.io/FTP-ROMS/)
 
