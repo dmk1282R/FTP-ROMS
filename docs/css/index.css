@@ -13,6 +13,18 @@ background-color: #282b30;
 	width: 16em;
 }
 
+h3 {
+	color: white;
+}
+
+.credits {
+	color: white;
+}
+
+.credits li {
+	padding-top: 10px;
+}
+
 .ddcolortabs ul{
 font: normal 11px Arial, Verdana, sans-serif;
 margin:0;
