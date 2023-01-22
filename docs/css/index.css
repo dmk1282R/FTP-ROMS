@@ -13,6 +13,11 @@ background-color: #282b30;
 	width: 16em;
 }
 
+p {
+	color: white;
+	border: 800px;
+}
+
 h3 {
 	color: white;
 }
