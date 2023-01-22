@@ -15,7 +15,7 @@ background-color: #282b30;
 
 p {
 	color: white;
-	border: 800px;
+	max-width: 70%;
 }
 
 h3 {
