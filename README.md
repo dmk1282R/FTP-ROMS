@@ -17,7 +17,7 @@
 - Twitter: [@roythearsonist](https://twitter.com/roythearsonist)
 - Github: [@roythearsonist](https://github.com/roythearsonist)
 
-## Other Dev
+## Web and CSS Dev
 
 👤 **MadMan-Modding(aka MAD)**
 
