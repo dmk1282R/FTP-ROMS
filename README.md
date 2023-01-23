@@ -14,7 +14,6 @@
 
 👤 **Roy The Arsonist**
 
-- Website: https://roythearsonist.github.io/
 - Twitter: [@roythearsonist](https://twitter.com/roythearsonist)
 - Github: [@roythearsonist](https://github.com/roythearsonist)
 
