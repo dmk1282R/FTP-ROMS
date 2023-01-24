@@ -14,11 +14,10 @@
 
 👤 **Roy The Arsonist**
 
-- Website: https://roythearsonist.github.io/
 - Twitter: [@roythearsonist](https://twitter.com/roythearsonist)
 - Github: [@roythearsonist](https://github.com/roythearsonist)
 
-## Main Leader for Web End
+## Web and CSS Dev
 
 👤 **MadMan-Modding(aka MAD)**
 
