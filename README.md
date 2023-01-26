@@ -21,11 +21,11 @@
 
 👤 **MadMan-Modding(aka MAD)**
 
- - Youtube: https://www.youtube.com/channel/UCxaBeInmSq53CZVcUv8CnKg
- 
- - Github: https://github.com/MADMAN-Modding
- 
- - GameBanana: https://gamebanana.com/members/2332051
+- Youtube: https://www.youtube.com/channel/UCxaBeInmSq53CZVcUv8CnKg
+
+- Github: https://github.com/MADMAN-Modding
+
+- GameBanana: https://gamebanana.com/members/2332051
 
 ## Show your support
 
