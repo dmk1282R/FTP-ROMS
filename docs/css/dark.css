@@ -8,6 +8,11 @@ a {
   color: white;
 }
 
+span img {
+  width: 500;
+  height: 500;
+}
+
 #game {
   max-width: 95%;
   max-height: 95%;
