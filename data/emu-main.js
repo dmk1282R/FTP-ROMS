@@ -8002,1343 +8002,972 @@ window.EJS_main = function (_0xa88a13, _0x17edbf, _0x2c1832) {
       }
       info = JSON.parse(JSON.stringify(info));
 
-      let dataHTML = {
-        top: "",
-        left: "",
-        center: "",
-        right: "",
-      };
-      let leftHandedMode = false;
-      if (_0x2593da && typeof _0x2593da.getCoreOptionsValue === "function") {
-        leftHandedMode =
-          _0x2593da.getCoreOptionsValue("left-handed-mode") === "on";
-      }
-      for (let i = 0; i < info.length; i++) {
-        if (info[i].type !== "button") continue;
-        let opts = { buttons: true };
-        if (leftHandedMode && ["left", "right"].includes(info[i].location)) {
-          info[i].location = info[i].location === "left" ? "right" : "left";
-          const amnt = JSON.parse(JSON.stringify(info[i]));
-          if (amnt.left) {
-            info[i].right = amnt.left;
-          }
-          if (amnt.right) {
-            info[i].left = amnt.right;
-          }
-        }
-        opts["b_" + info[i].id.toLowerCase()] = true;
-        let style = "";
-        if (info[i].left) {
-          style +=
-            "left:" +
-            info[i].left +
-            (typeof info[i].left === "number" ? "px" : "") +
-            ";";
-        }
-        if (info[i].right) {
-          style +=
-            "right:" +
-            info[i].right +
-            (typeof info[i].right === "number" ? "px" : "") +
-            ";";
-        }
-        if (info[i].top) {
-          style +=
-            "top:" +
-            info[i].top +
-            (typeof info[i].top === "number" ? "px" : "") +
-            ";";
-        }
-        if (!info[i].bold) {
-          style += "font-weight:normal;";
-        } else if (info[i].bold) {
-          style += "font-weight:bold;";
-        }
-        info[i].fontSize = info[i].fontSize || 30;
-        style += "font-size:" + info[i].fontSize + "px;";
-        if (info[i].block) {
-          style += blockCSS;
-        }
-        if (["top", "center", "left", "right"].includes(info[i].location)) {
-          dataHTML[info[i].location] +=
-            '<div class="' +
-            getClass(opts) +
-            '" style="' +
-            style +
-            '">' +
-            info[i].text +
-            "</div>";
-        }
-      }
-      html +=
-        '<div class="' +
-        getClass({ "virtual-gamepad": true }) +
-        '" style="display: block;">';
-      html += '<div class="' + getClass({ top: true }) + '">';
-      html += dataHTML.top;
-      html += "</div>";
-      html += '<div class="' + getClass({ left: true }) + '">';
-      html += dataHTML.left;
-      html += "</div>";
-      html += '<div class="' + getClass({ center: true }) + '">';
-      html += dataHTML.center;
-      html += "</div>";
-      html += '<div class="' + getClass({ right: true }) + '">';
-      html += dataHTML.right;
-      html += "</div></div>";
-      _0x378b5c.virtualGamepadContainer.innerHTML = html;
-      _0x132da7(_0x378b5c.virtualGamepadContainer, !_0x1ed80b);
-
-      let _0x2c1832 = getClass({
-          "virtual-gamepad": true,
-        }),
-        _0x2ec721 = getClass({
-          touch: true,
-        });
-      if (!_0x59aa33.isIos) {
-        _0x1093f4.call(
-          this,
-          _0x530042.call(this, ".".concat(_0x2c1832)),
-          "touchmove",
-          function (event) {
-            event.stopPropagation();
-          }
-        );
-      }
-      function createDPad(config) {
-        let _0xb30294 = config.container,
-          _0x46ee07 = config.event;
-        if (typeof _0x46ee07 !== "function") _0x46ee07 = function () {};
-        let _0x2af034 = _0x428003("div", {
-            class: getClass({ "dpad-bg": true }),
-          }),
-          _0x573eda = _0x428003("div", {
-            class: getClass({ "dpad-front": true }),
-          });
-
-        function _0x12b76b(event) {
-          let _0x243fd0 = event.targetTouches[0];
-          if (_0x243fd0) {
-            let _0x30ad4f = _0x573eda.getBoundingClientRect(),
-              _0x3f2d89 =
-                _0x243fd0.clientX - _0x30ad4f.left - _0x573eda.clientWidth / 2,
-              _0x23d024 =
-                _0x243fd0.clientY - _0x30ad4f.top - _0x573eda.clientHeight / 2,
-              _0x10098e = 0,
-              _0x419bd0 = 0,
-              _0x21a1ad = 0,
-              _0x1f5439 = 0,
-              _0x4fda8c = Math.atan(_0x3f2d89 / _0x23d024) / (Math.PI / 180);
-
-            _0x23d024 <= -10 && (_0x10098e = 1);
-            _0x23d024 >= 10 && (_0x419bd0 = 1);
-            _0x3f2d89 >= 10 &&
-              ((_0x1f5439 = 1),
-              (_0x21a1ad = 0),
-              ((_0x4fda8c < 0 && _0x4fda8c >= -35) ||
-                (_0x4fda8c > 0 && _0x4fda8c <= 35)) &&
-                (_0x1f5439 = 0),
-              (_0x10098e = _0x4fda8c < 0 && _0x4fda8c >= -55 ? 1 : 0),
-              (_0x419bd0 = _0x4fda8c > 0 && _0x4fda8c <= 55 ? 1 : 0));
-            _0x3f2d89 <= -10 &&
-              ((_0x1f5439 = 0),
-              (_0x21a1ad = 1),
-              ((_0x4fda8c < 0 && _0x4fda8c >= -35) ||
-                (_0x4fda8c > 0 && _0x4fda8c <= 35)) &&
-                (_0x21a1ad = 0),
-              (_0x10098e = _0x4fda8c > 0 && _0x4fda8c <= 55 ? 1 : 0),
-              (_0x419bd0 = _0x4fda8c < 0 && _0x4fda8c >= -55 ? 1 : 0));
-            _0x2af034.classList.toggle(
-              getClass({ "dpad-right": true }),
-              _0x1f5439
-            );
-            _0x2af034.classList.toggle(
-              getClass({ "dpad-left": true }),
-              _0x21a1ad
-            );
-            _0x2af034.classList.toggle(
-              getClass({ "dpad-up": true }),
-              _0x10098e
-            );
-            _0x2af034.classList.toggle(
-              getClass({ "dpad-down": true }),
-              _0x419bd0
-            );
-            _0x46ee07(_0x10098e, _0x419bd0, _0x21a1ad, _0x1f5439);
-          }
-          event.stopPropagation();
-        }
-        function _0x320749(event) {
-          _0x46ee07(0, 0, 0, 0);
-          _0x2af034.classList.toggle(getClass({ "dpad-up": true }), false);
-          _0x2af034.classList.toggle(getClass({ "dpad-down": true }), false);
-          _0x2af034.classList.toggle(getClass({ "dpad-right": true }), false);
-          _0x2af034.classList.toggle(getClass({ "dpad-left": true }), false);
-          event.stopPropagation();
-        }
-
-        _0x2af034.innerHTML = '<div class="'
-          .concat(getClass({ "dpad-1": true }), '"><div class="')
-          .concat(
-            getClass({ "dpad-1-bg": true }),
-            '"></div></div>\n    <div class="'
-          )
-          .concat(getClass({ "dpad-2": true }), '"><div class="')
-          .concat(getClass({ "dpad-2-bg": true }), '"></div></div>');
-        _0xb30294.append(_0x2af034);
-        _0xb30294.append(_0x573eda);
-        _0x1093f4.call(_this, _0x573eda, "touchstart touchmove", _0x12b76b);
-        _0x1093f4.call(_this, _0x573eda, "touchend touchcancel", _0x320749);
-      }
-      info.forEach((dpad, index) => {
-        if (dpad.type !== "dpad") return;
-        let opts = {};
-        if (leftHandedMode && ["left", "right"].includes(dpad.location)) {
-          dpad.location = dpad.location === "left" ? "right" : "left";
-          const amnt = JSON.parse(JSON.stringify(dpad));
-          if (amnt.left) {
-            dpad.right = amnt.left;
-          }
-          if (amnt.right) {
-            dpad.left = amnt.right;
-          }
-        }
-        opts[dpad.location.toLowerCase()] = true;
-        const parent = _0x530042.call(
-          this,
-          "."
-            .concat(
-              getClass({
-                "ejs-virtual-gamepad": true,
-              }),
-              " ."
-            )
-            .concat(getClass(opts))
-        );
-        opts["dpad_" + index] = true;
-        const elem = _0x428003("div", {
-          class: "."
-            .concat(
-              getClass({
-                "ejs-virtual-gamepad": true,
-                "dpad-container": true,
-              }),
-              " ."
-            )
-            .concat(getClass(opts)),
-        });
-        let style = "";
-        if (dpad.left) {
-          style += "left:" + dpad.left + ";";
-        }
-        if (dpad.right) {
-          style += "right:" + dpad.right + ";";
-        }
-        if (dpad.top) {
-          style += "top:" + dpad.top + ";";
-        }
-        elem.style = style;
-        parent.appendChild(elem);
-        createDPad({
-          container: elem,
-          event: function (up, down, left, right) {
-            if (dpad.joystickInput) {
-              if (up === 1) up = 0x7fff;
-              if (down === 1) up = 0x7fff;
-              if (left === 1) up = 0x7fff;
-              if (right === 1) up = 0x7fff;
-            }
-            _0x378b5c.syncInput(0, dpad.inputValues[0], up);
-            _0x378b5c.syncInput(0, dpad.inputValues[1], down);
-            _0x378b5c.syncInput(0, dpad.inputValues[2], left);
-            _0x378b5c.syncInput(0, dpad.inputValues[3], right);
-          },
-        });
-      });
-
-      if (this.zoneObj) {
-        this.zoneObj.forEach((zone) => {
-          zone.destroy();
-        });
-      }
-      this.zoneObj = [];
-      let zone;
-      info.forEach((zone, index) => {
-        if (zone.type !== "zone") return;
-        let opts = {};
-        if (leftHandedMode && ["left", "right"].includes(zone.location)) {
-          zone.location = zone.location === "left" ? "right" : "left";
-          const amnt = JSON.parse(JSON.stringify(zone));
-          if (amnt.left) {
-            zone.right = amnt.left;
-          }
-          if (amnt.right) {
-            zone.left = amnt.right;
-          }
-        }
-        opts[zone.location.toLowerCase()] = true;
-        const parent = _0x530042.call(
-          this,
-          "."
-            .concat(
-              getClass({
-                "ejs-virtual-gamepad": true,
-              }),
-              " ."
-            )
-            .concat(getClass(opts))
-        );
-        opts["zone_" + index] = true;
-        const elem = _0x428003("div", {
-          class: "."
-            .concat(
-              getClass({
-                "ejs-virtual-gamepad": true,
-              }),
-              " ."
-            )
-            .concat(getClass(opts)),
-        });
-        parent.appendChild(elem);
-        const zoneObj = _0x3a58c8.a.create({
-          zone: elem,
-          mode: "static",
-          position: {
-            left: zone.left,
-            top: zone.top,
-          },
-          color: "red",
-        });
-        zoneObj.on("end", function (_0x27f006, _0x1fb527) {
-          _0x378b5c.syncInput(0, zone.inputValues[0], 0);
-          _0x378b5c.syncInput(0, zone.inputValues[1], 0);
-          _0x378b5c.syncInput(0, zone.inputValues[2], 0);
-          _0x378b5c.syncInput(0, zone.inputValues[3], 0);
-        });
-        zoneObj.on("move", function (_0x1b060e, _0x4ae7d6) {
-          const degree = _0x4ae7d6.angle.degree;
-          const distance = _0x4ae7d6.distance;
-          if (zone.joystickInput === true) {
-            let _0x4773fe = 0,
-              _0x4c3bc7 = 0;
-            if (degree > 0 && degree <= 45) {
-              _0x4773fe = distance / 50;
-              _0x4c3bc7 = (-0.022222222222222223 * degree * distance) / 50;
-            }
-            if (degree > 45 && degree <= 90) {
-              _0x4773fe =
-                (0.022222222222222223 * (90 - degree) * distance) / 50;
-              _0x4c3bc7 = -distance / 50;
-            }
-            if (degree > 90 && degree <= 135) {
-              _0x4773fe =
-                (0.022222222222222223 * (90 - degree) * distance) / 50;
-              _0x4c3bc7 = -distance / 50;
-            }
-            if (degree > 135 && degree <= 180) {
-              _0x4773fe = -distance / 50;
-              _0x4c3bc7 =
-                (-0.022222222222222223 * (180 - degree) * distance) / 50;
-            }
-            if (degree > 135 && degree <= 225) {
-              _0x4773fe = -distance / 50;
-              _0x4c3bc7 =
-                (-0.022222222222222223 * (180 - degree) * distance) / 50;
-            }
-            if (degree > 225 && degree <= 270) {
-              _0x4773fe =
-                (-0.022222222222222223 * (270 - degree) * distance) / 50;
-              _0x4c3bc7 = distance / 50;
-            }
-            if (degree > 270 && degree <= 315) {
-              _0x4773fe =
-                (-0.022222222222222223 * (270 - degree) * distance) / 50;
-              _0x4c3bc7 = distance / 50;
-            }
-            if (degree > 315 && degree <= 359.9) {
-              _0x4773fe = distance / 50;
-              _0x4c3bc7 =
-                (0.022222222222222223 * (360 - degree) * distance) / 50;
-            }
-            if (_0x4773fe > 0) {
-              _0x378b5c.syncInput(0, zone.inputValues[0], 0x7fff * _0x4773fe);
-              _0x378b5c.syncInput(0, zone.inputValues[1], 0);
-            } else {
-              _0x378b5c.syncInput(0, zone.inputValues[1], 0x7fff * -_0x4773fe);
-              _0x378b5c.syncInput(0, zone.inputValues[0], 0);
-            }
-            if (_0x4c3bc7 > 0) {
-              _0x378b5c.syncInput(0, zone.inputValues[2], 0x7fff * _0x4c3bc7);
-              _0x378b5c.syncInput(0, zone.inputValues[3], 0);
-            } else {
-              _0x378b5c.syncInput(0, zone.inputValues[3], 0x7fff * -_0x4c3bc7);
-              _0x378b5c.syncInput(0, zone.inputValues[2], 0);
-            }
-          } else {
-            if (degree >= 30 && degree < 150) {
-              _0x378b5c.syncInput(0, zone.inputValues[0], 1);
-            } else {
-              window.setTimeout(function () {
-                _0x378b5c.syncInput(0, zone.inputValues[0], 0);
-              }, 30);
-            }
-            if (degree >= 210 && degree < 330) {
-              _0x378b5c.syncInput(0, zone.inputValues[1], 1);
-            } else {
-              window.setTimeout(function () {
-                _0x378b5c.syncInput(0, zone.inputValues[1], 0);
-              }, 30);
-            }
-            if (degree >= 120 && degree < 240) {
-              _0x378b5c.syncInput(0, zone.inputValues[2], 1);
-            } else {
-              window.setTimeout(function () {
-                _0x378b5c.syncInput(0, zone.inputValues[2], 0);
-              }, 30);
-            }
-            if (degree >= 300 || (degree >= 0 && degree < 60)) {
-              _0x378b5c.syncInput(0, zone.inputValues[3], 1);
-            } else {
-              window.setTimeout(function () {
-                _0x378b5c.syncInput(0, zone.inputValues[3], 0);
-              }, 30);
-            }
-          }
-        });
-        this.zoneObj.push(zoneObj);
-      });
-
-      let keys = [];
-      for (let i = 0; i < info.length; i++) {
-        if (info[i].type !== "button") continue;
-        let opts = {};
-        opts["b_" + info[i].id.toLowerCase()] = true;
-        let value;
-        if (_this.newCores === 2 && info[i].input_new_cores) {
-          value = info[i].input_new_cores;
-        } else {
-          value = info[i].input_value;
-        }
-        keys.push({ id: opts, number: value });
-      }
-      keys.forEach((a) => {
-        let element = _0x530042.call(
-          _this,
-          ".".concat(_0x2c1832, " .").concat(getClass(a.id))
-        );
-        if (!element) return;
-        _0x1093f4.call(
-          _this,
-          element,
-          "touchstart touchend touchcancel",
-          function (e) {
-            if (e.type === "touchend" || e.type === "touchcancel") {
-              _0x3a8e2f(e.target, _0x2ec721, false);
-              window.setTimeout(function () {
-                _0x378b5c.syncInput(0, a.number, 0);
-              }, 30);
-            } else {
-              _0x3a8e2f(e.target, _0x2ec721, true);
-              _0x378b5c.syncInput(0, a.number, 1);
-            }
-            e.preventDefault();
-          }
-        );
-      });
-
-      if (!forceUpdateHTML) {
-        const menuButton = _0x428003(
-          "div",
-          {
-            class: getClass({
-              ejs__widget: true,
-              ejs__widget_controls_toggle: true,
-            }),
-          },
-          ""
-        );
-        menuButton.innerHTML =
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>';
-        _0x530042
-          .call(this, ".".concat(getClass({ ejs__widgets: true })))
-          .appendChild(menuButton);
-        let hideTimeout;
-        _0x1093f4.call(this, menuButton, "mousedown touchstart", function (e) {
-          _0x3a8e2f(e.target, _0x2ec721, true);
-          clearTimeout(hideTimeout);
-          _0x5ab74d.toggleControls.call(_this, true);
-          hideTimeout = setTimeout(function () {
-            _0x5ab74d.toggleControls.call(_this, false);
-          }, 5000);
-        });
-      }
-    },
-    setup: function () {
-      let _this = this;
-      if (!this.game) {
-        console.warn("No game element found!");
-        return;
-      }
-      _0x378b5c.playerName = _this.config.playerName;
-      _0x3a8e2f(this.elements.container, this.config.classNames.type, true);
-      this.elements.container.setAttribute("tabindex", "0");
-      if (this.color) {
-        let _0x17edbf = (function (_0x175d8e) {
-          let _0x17edbf = _0x175d8e.toLowerCase();
-          if (
-            _0x17edbf &&
-            /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(_0x17edbf)
-          ) {
-            if (0x4 === _0x17edbf.length) {
-              for (
-                let _0x2c1832 = "#", _0x4c881f = 1;
-                _0x4c881f < 0x4;
-                _0x4c881f += 1
-              )
-                _0x2c1832 += _0x17edbf
-                  .slice(_0x4c881f, _0x4c881f + 1)
-                  .concat(_0x17edbf.slice(_0x4c881f, _0x4c881f + 1));
-              _0x17edbf = _0x2c1832;
-            }
-            let _0x5ac4ff = [];
-            for (let _0x324169 = 1; _0x324169 < 0x7; _0x324169 += 2)
-              _0x5ac4ff.push(
-                parseInt(
-                  "0x".concat(_0x17edbf.slice(_0x324169, _0x324169 + 2)),
-                  0x10
-                )
-              );
-            return _0x5ac4ff;
-          }
-          return null;
-        })(this.color);
-        _0x17edbf &&
-          this.elements.container.setAttribute(
-            "style",
-            "--ejs-primary-color: "
-              .concat(_0x17edbf[0], ", ")
-              .concat(_0x17edbf[1], ", ")
-              .concat(_0x17edbf[2])
-          );
-      }
-      this.elements.wrapper = _0x428003("div", {
-        class: this.config.classNames.video,
-      });
-      _0x580edd(this.game, this.elements.wrapper);
-      if ("video" !== _this.game.tagName.toLocaleLowerCase()) {
-        let _0x2c1832 = this.config.volume;
-        Object.defineProperty(_this.game, "volume", {
-          get: function () {
-            return _0x2c1832;
-          },
-          set: function (_0x4cca18) {
-            (_0x2c1832 = _0x4cca18),
-              _0xbae705.call(_this, _this.game, "volumechange");
-          },
-        });
-        let _0x541fe1 = _this.storage.get("muted");
-        Object.defineProperty(_this.game, "muted", {
-          get: function () {
-            return _0x541fe1;
-          },
-          set: function (_0x54b6e0) {
-            let _0x2c1832 = !!_0x1e2c68.boolean(_0x54b6e0) && _0x54b6e0;
-            (_0x541fe1 = _0x2c1832),
-              _0xbae705.call(_this, _this.game, "volumechange");
-          },
-        });
-      }
-      window.addEventListener(
-        "beforeunload",
-        function (_0x34b11a) {
-          if (_this.started && _this.getStartName()) {
-            _0x27f4c4.FS.syncfs(function () {});
-            _0x378b5c.saveSavFiles();
-            _0x27f4c4.FS.syncfs(function () {});
-          }
-        },
-        true
-      );
-      //Wille save savefiles to indexeddb
-      window.saveSaveFiles = function () {
-        if (!_this.getStartName()) return;
-        console.log("saving save files");
-        _0x378b5c.saveSavFiles();
-        _0x27f4c4.FS.syncfs(false, function () {});
-      };
-      setInterval(function () {
-        if (_this.started) {
-          saveSaveFiles();
-        }
-      }, 60000); //60000 = 1 minute
-    },
-    listeners: function () {
-      let _this = this;
-      const elem = _0x530042.call(
-        _this,
-        ".".concat(
-          getClass({
-            ejs__dialogs: true,
-          })
-        )
-      );
-      let counter = 0;
-      _0x1093f4.call(_this, elem, "dragenter", function (e) {
-        e.preventDefault();
-        counter++;
-        _0x132da7(_this.elements.dialogs.message, false);
-      });
-      _0x1093f4.call(_this, elem, "dragover", function (e) {
-        e.preventDefault();
-      });
-      _0x1093f4.call(_this, elem, "dragleave", function (e) {
-        e.preventDefault();
-        counter--;
-        if (counter === 0) {
-          _0x132da7(_this.elements.dialogs.message, true);
-        }
-      });
-      _0x1093f4.call(_this, elem, "dragend", function (e) {
-        e.preventDefault();
-        counter = 0;
-        _0x132da7(_this.elements.dialogs.message, true);
-      });
-      _0x1093f4.call(_this, elem, "drop", function (e) {
-        e.preventDefault();
-        _0x132da7(_this.elements.dialogs.message, true);
-        counter = 0;
-        const items = e.dataTransfer.items;
-        let file;
-        for (let i = 0; i < items.length; i++) {
-          if (items[i].kind !== "file") continue;
-          file = items[i];
-          break;
-        }
-        if (!file) return;
-        const fileHandle = file.getAsFile();
-        fileHandle.arrayBuffer().then((data) => {
-          _0x378b5c.loadState(new Uint8Array(data), 0);
-        });
-      });
-      _this.elements.buttons.restart &&
-        _0x1093f4.call(
-          _this,
-          _this.elements.buttons.restart,
-          "click",
-          function (_0x5cfc51) {
-            _0x378b5c.restartGame();
-            _0x378b5c.inputsData = {};
-            if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
-              (async () => {
-                const state = await _0x378b5c.saveState();
-                const file = new File([state], "0-game.state", {
-                  type: "",
-                  lastModified: new Date(),
-                });
-                _0x378b5c.connection.shareFile(file);
-                _0x378b5c.inputsData = {};
-                _0x378b5c.wait = true;
-                _0x378b5c.systemPause(1);
-                _0x27f4c4.Module.pauseMainLoop();
-                _0x378b5c.disableControl(true);
-              })();
-            }
-            saveSaveFiles();
-          }
-        );
-      _this.elements.buttons.screenRecord &&
-        _0x1093f4.call(
-          _this,
-          _this.elements.buttons.screenRecord,
-          "click",
-          function (_0x5cfc51) {
-            if (!_this.recordData) {
-              _this.recordData = { started: false, data: [], stopped: false };
-            }
-            if (!_this.recordData.started) {
-              //start recording
-              let options;
-              if (MediaRecorder.isTypeSupported("video/webm; codecs=h264")) {
-                options = { mimeType: "video/webm; codecs=h264" };
-              } else if (
-                MediaRecorder.isTypeSupported("video/webm; codecs=H264")
-              ) {
-                options = { mimeType: "video/webm; codecs=H264" };
-              } else if (
-                MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
-              ) {
-                options = { mimeType: "video/webm; codecs=vp9" };
-              } else if (
-                MediaRecorder.isTypeSupported("video/webm; codecs=vp8")
-              ) {
-                options = { mimeType: "video/webm; codecs=vp8" };
-              } else if (
-                MediaRecorder.isTypeSupported("video/webm; codecs=avc1")
-              ) {
-                options = { mimeType: "video/webm; codecs=avc1" };
-              } else if (
-                MediaRecorder.isTypeSupported("video/webm; codecs=vp9.0")
-              ) {
-                options = { mimeType: "video/webm; codecs=vp9.0" };
-              } else if (
-                MediaRecorder.isTypeSupported("video/webm; codecs=vp8.0")
-              ) {
-                options = { mimeType: "video/webm; codecs=vp8.0" };
-              } else {
-                options = {};
-              }
-              function gotStreams(stream) {
-                _this.elements.buttons.screenRecord.querySelector(
-                  ".".concat(
-                    getClass({
-                      ejs__tooltip: true,
-                    })
-                  )
-                ).innerHTML = _this.localization("Stop Screen Recording");
-                _this.recordData.stream = stream;
-                _this.recordData.recorder = new MediaRecorder(
-                  _this.recordData.stream,
-                  options
-                );
-                _this.recordData.recorder.ondataavailable = function (e) {
-                  if (e.data.size > 0) {
-                    _this.recordData.data.push(e.data);
-                  }
-                  if (_this.recordData.stopped) {
-                    let a = document.createElement("a");
-                    a.href = window.URL.createObjectURL(
-                      new Blob(_this.recordData.data, { type: "video/webm" })
-                    );
-                    let aname;
-                    if (typeof _this.gameName == "string") {
-                      aname = _this.gameName;
+                let dataHTML = {
+                    top: '',
+                    left: '',
+                    center: '',
+                    right: ''
+                }
+                let leftHandedMode = false;
+                if (_0x2593da && typeof _0x2593da.getCoreOptionsValue === 'function') {
+                    leftHandedMode = _0x2593da.getCoreOptionsValue('left-handed-mode')==='on';
+                }
+                for (let i=0; i<info.length; i++) {
+                    if (info[i].type !== 'button') continue;
+                    let opts = {'buttons': true};
+                    if (leftHandedMode && ['left', 'right'].includes(info[i].location)) {
+                        info[i].location = (info[i].location==='left') ? 'right' : 'left';
+                        const amnt = JSON.parse(JSON.stringify(info[i]));
+                        if (amnt.left) {
+                            info[i].right = amnt.left;
+                        }
+                        if (amnt.right) {
+                            info[i].left = amnt.right;
+                        }
                     }
-                    a.download = aname
-                      ? "".concat(aname, "-recording.webm")
-                      : "record.webm";
-                    a.click();
-                    window.URL.revokeObjectURL(a.href);
-                    delete _this.recordData;
-                    _this.elements.buttons.screenRecord.querySelector(
-                      ".".concat(
-                        getClass({
-                          ejs__tooltip: true,
-                        })
-                      )
-                    ).innerHTML = _this.localization("Start Screen Recording");
-                  }
-                };
-                _this.recordData.recorder.start();
-                _this.recordData.started = true;
-              }
-              if (
-                window.navigator &&
-                navigator.mediaDevices &&
-                typeof navigator.mediaDevices.getDisplayMedia === "function"
-              ) {
-                _0x27f4c4.Module.pauseMainLoop();
-                _this.playing = false;
-                alert(
-                  'Please check "share system audio" to have audio in the recording. We only need the audio stream so your entire screen will not be recorded'
-                );
-                let time = setTimeout(function () {
-                  _this.playing = true;
-                  _0x27f4c4.Module.resumeMainLoop();
-                }, 20000);
-                navigator.mediaDevices
-                  .getDisplayMedia({
-                    audio: true, //we only need the audio, we dont use the video stream at all
-                    video: { mediaSource: "screen" },
-                  })
-                  .then(function (stream) {
-                    let canvasStream =
-                      _0x27f4c4.Module.canvas.captureStream(30);
-                    try {
-                      clearTimeout(time);
-                    } catch (e) {}
-                    let audio = stream.getAudioTracks();
-                    for (let i = 0; i < audio.length; i++) {
-                      canvasStream.addTrack(audio[i]);
+                    opts['b_'+info[i].id.toLowerCase()] = true;
+                    let style = '';
+                    if (info[i].left) {
+                        style += 'left:'+info[i].left+(typeof info[i].left === 'number'?'px':'')+';';
                     }
-                    gotStreams(canvasStream);
-                    _this.playing = true;
-                    _0x27f4c4.Module.resumeMainLoop();
-                  });
-              } else {
-                let canvasStream = _0x27f4c4.Module.canvas.captureStream(30);
-                gotStreams(canvasStream);
-              }
-            } else if (_this.recordData.started) {
-              //stop recording
-              _this.recordData.recorder.stop();
-              _this.recordData.stopped = true;
-            }
-          }
-        );
-      _this.elements.buttons.cacheManager &&
-        _0x1093f4.call(
-          _this,
-          _this.elements.buttons.cacheManager,
-          "click",
-          function (_0x5cfc51) {
-            if (_0x27f4c4.romdb) {
-              _0x132da7(_this.elements.dialogs.cache, false);
-              let _0x3360eb = _this.elements.dialogs.cache.querySelector(
-                ".".concat(_0x378b5c.classNames["dialog-content"])
-              );
-              _0x3360eb.innerHTML =
-                "<div>" + _this.localization("Loading") + "</div>";
-              _0x27f4c4.romdb.getAll(
-                function (_0x43586d) {
-                  if (_0x43586d) {
-                    let _0x275730 = _0x428003("table", {
-                        style: "width:100%;padding-left:10px;text-align:left",
-                      }),
-                      _0x1ab9e9 = _0x428003("tbody");
-                    _0x43586d.length > 0
-                      ? ((_0x3360eb.innerHTML = ""),
-                        _0x43586d.forEach(function (_0x32b0b7, _0x2d0e11) {
-                          if (
-                            _0x32b0b7.key &&
-                            !/-part-\d+$/.test(_0x32b0b7.key)
-                          ) {
-                            let _0x277c67 = [_0x32b0b7.key];
-                            for (
-                              let _0x3360eb = Math.ceil(
-                                  _0x32b0b7.filesize / 0x6400000
-                                ),
-                                _0x3edb35 = 1;
-                              _0x3edb35 < _0x3360eb;
-                              _0x3edb35 += 1
-                            )
-                              _0x277c67.push(
-                                ""
-                                  .concat(_0x32b0b7.key, "-part-")
-                                  .concat(_0x3edb35)
-                              );
-                            let _0x3e31f6 = _0x428003("tr"),
-                              _0x5b75bd = _0x428003("td"),
-                              _0x227405 = _0x428003("td"),
-                              _0xac150b = _0x428003("td");
-                            (_0x5b75bd.innerHTML = _0x32b0b7.filename),
-                              (_0x227405.innerHTML = (function (_0x1858c1) {
-                                let _0x2d0e11 = -1;
-                                do {
-                                  (_0x1858c1 /= 0x400), _0x2d0e11++;
-                                } while (_0x1858c1 > 0x400);
-                                return (
-                                  Math.max(_0x1858c1, 0.1).toFixed(1) +
-                                  [
-                                    " kB",
-                                    " MB",
-                                    " GB",
-                                    " TB",
-                                    "PB",
-                                    "EB",
-                                    "ZB",
-                                    "YB",
-                                  ][_0x2d0e11]
-                                );
-                              })(_0x32b0b7.filesize)),
-                              (_0xac150b.innerHTML =
-                                '<a href="#" onclick="return false">Remove</a>'),
-                              _0x3e31f6.appendChild(_0x5b75bd),
-                              _0x3e31f6.appendChild(_0x227405),
-                              _0x3e31f6.appendChild(_0xac150b),
-                              _0x1ab9e9.appendChild(_0x3e31f6),
-                              (_0xac150b.querySelector("a").onclick = function (
-                                _0x16f22a
-                              ) {
-                                _0x27f4c4.romdb.removeBatch(_0x277c67);
-                                try {
-                                  _0x1ab9e9.removeChild(_0x3e31f6);
-                                } catch (_0x353628) {}
-                                return _0x16f22a.stopPropagation(), false;
-                              });
-                          }
-                        }),
-                        _0x275730.appendChild(_0x1ab9e9),
-                        _0x3360eb.appendChild(_0x275730))
-                      : (_0x3360eb.innerHTML =
-                          '<div style="text-align:center">' +
-                          _this.localization("Empty") +
-                          "</div>");
-                  } else
-                    _0x3360eb.innerHTML =
-                      '<div style="text-align:center">' +
-                      _this.localization("Empty") +
-                      "</div>";
-                },
-                function () {}
-              );
-            }
-            return false;
-          }
-        );
-      _this.elements.buttons.play &&
-        Array.from(_this.elements.buttons.play).forEach(function (_0x24495b) {
-          _0x1093f4.call(_this, _0x24495b, "click", function (_0x966382) {
-            if (_this.playing) {
-              _this.playing = false;
-              _0x27f4c4.Module.pauseMainLoop();
-              if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
-                _0x378b5c.connection.send(
-                  JSON.stringify({
-                    act: "pause",
-                  })
-                );
-              }
-              _0xbae705.call(_this, _this.elements.container, "pause", false, {
-                pause: true,
-              });
-            } else {
-              _this.playing = true;
-              _0x27f4c4.Module.resumeMainLoop();
-              if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
-                _0x378b5c.connection.send(
-                  JSON.stringify({
-                    act: "resume",
-                  })
-                );
-              }
-              _0xbae705.call(_this, _this.elements.container, "pause", false, {
-                pause: false,
-              });
-            }
-          });
-        }),
-        _this.elements.buttons.netplay &&
-          _0x1093f4.call(
-            _this,
-            _this.elements.buttons.netplay,
-            "click",
-            function (_0x2317b9) {
-              if (window.EJS_TURN_URLS !== null && !window.EJS_TURN_URLS) {
-                (async function (server) {
-                  try {
-                    let resp = await fetch(server + "webrtc");
-                    window.EJS_TURN_URLS = JSON.parse(await resp.text());
-                  } catch (e) {
-                    window.EJS_TURN_URLS = null;
-                    console.warn("Could not contact netplay server", e);
-                  }
-                })(_this.listUrl);
-              }
-              _0x378b5c.disableControl(true);
-              _0x132da7(_this.elements.dialogs.netplay, false);
-              if (_0x378b5c.players.length > 0) {
-                _0x378b5c.openRoom(_0xa88a13);
-              } else {
-                _0x378b5c.stopLoadRooms();
-                _0x378b5c.loadRoomsList();
-              }
-              if (!_0x378b5c.playerName) {
-                _0x4d8495.show("modal-9de6c4e9ce2b9361", {
-                  closeByEsckey: false,
-                });
-              }
-            }
-          ),
-        _this.elements.buttons.cheat &&
-          _0x1093f4.call(
-            _this,
-            _this.elements.buttons.cheat,
-            "click",
-            function (_0x44b01a) {
-              _0x132da7(_this.elements.dialogs.cheat, false);
-            }
-          );
-      _this.game.stateloadField = _0x428003("input");
-      _this.game.stateloadField.type = "file";
-      _this.game.stateloadField.onchange = function _0x17edbf(_0xcd4599) {
-        let _0xfd246e,
-          _0x3fdd71 = _0xcd4599.target.files;
-        _0x3fdd71.length > 0 &&
-          (((_0xfd246e = new FileReader()).file_name = _0x3fdd71[0].name),
-          (_0xfd246e.onload = function () {
-            EJS_loadState(new Uint8Array(_0xfd246e.result));
-          }),
-          _0xfd246e.readAsArrayBuffer(_0x3fdd71[0])),
-          (_this.game.stateloadField = _0x428003("input")),
-          (_this.game.stateloadField.type = "file"),
-          (_this.game.stateloadField.onchange = _0x17edbf);
-      };
-      _0x1093f4.call(
-        _this,
-        _this.elements.container,
-        "loadstate",
-        function (_0x13504c) {
-          if (_0x378b5c.saveLoadDB.call(_this, "load")) {
-            return;
-          }
-          _0x1e2c68.function(_this.config.onloadstate)
-            ? _this.config.onloadstate.call(null, _this.loadState)
-            : _this.game.stateloadField.click(),
-            _this.elements.container.focus();
-        }
-      );
-      document.addEventListener("visibilitychange", function () {
-        "hidden" === document.visibilityState
-          ? console.log("hidden")
-          : console.log("active");
-      });
-    },
-    bindFunction: function () {
-      let _this = this,
-        _0x17edbf = getSystem(_this.system, true);
-      if (_0x27f4c4.Module && _0x27f4c4.Module._set_volume) {
-        let _0x2c1832 = _0x27f4c4.Module.cwrap("set_volume", "null", [
-          "number",
-        ]);
-        _0x378b5c.setVolume = function () {
-          let _0x17edbf = 0;
-          _this.volume < 1 &&
-            ((_0x17edbf =
-              0 === _this.volume ? -0x50 : 0x1e * _this.volume - 0x1e),
-            _0x2c1832(_0x17edbf)),
-            _this.muted && (_0x17edbf = -0x50),
-            _0x2c1832(_0x17edbf);
-        };
-      }
-      _0x378b5c.setVariable = _0x27f4c4.Module.cwrap("set_variable", "null", [
-        "string",
-        "string",
-      ]);
-      _0x378b5c.simulateInputFn = _0x27f4c4.Module.cwrap(
-        "simulate_input",
-        "null",
-        ["number", "number", "number"]
-      );
-      let _0x2c63cc = {
-        0: null,
-        1: null,
-        2: null,
-        3: null,
-        4: null,
-        5: null,
-        6: null,
-        7: null,
-        8: null,
-        9: null,
-        10: null,
-        11: null,
-        12: null,
-        13: null,
-        14: null,
-        15: null,
-        16: null,
-        17: null,
-        18: null,
-        19: null,
-        20: null,
-        21: null,
-        22: null,
-        23: null,
-        24: null,
-        25: null,
-        26: null,
-        27: null,
-        28: null,
-        29: null,
-        30: null,
-        31: null,
-      };
-      _0x378b5c.simulateInput = function (player, index, value) {
-        if (_0x378b5c.connected) {
-          if (_this.playing && !_0x378b5c.disableInput) {
-            var _0x35b9c1 = _0x378b5c.connection.userid,
-              _0x4d96ad = _0x378b5c.roomMaster === _0x35b9c1,
-              _0xf1bb97 = _0x378b5c.players.indexOf(_0x35b9c1),
-              _0x52e1f4 = _0x378b5c.currentFrameNum();
-            player >> 0x0 == 0x0 &&
-              (_0x2c63cc[index] !== value &&
-                (_0x4d96ad
-                  ? (_0x378b5c.inputsData[_0x52e1f4] ||
-                      (_0x378b5c.inputsData[_0x52e1f4] = []),
-                    _0x378b5c.inputsData[_0x52e1f4].push({
-                      index: _0xf1bb97,
-                      key: index,
-                      status: value,
-                      frame: _0x52e1f4,
+                    if (info[i].right) {
+                        style += 'right:'+info[i].right+(typeof info[i].right === 'number'?'px':'')+';';
+                    }
+                    if (info[i].top) {
+                        style += 'top:'+info[i].top+(typeof info[i].top === 'number'?'px':'')+';';
+                    }
+                    if (!info[i].bold) {
+                        style += 'font-weight:normal;';
+                    } else if (info[i].bold) {
+                        style += 'font-weight:bold;';
+                    }
+                    info[i].fontSize = info[i].fontSize || 30;
+                    style += 'font-size:'+info[i].fontSize+'px;';
+                    if (info[i].block) {
+                        style += blockCSS;
+                    }
+                    if (['top', 'center', 'left', 'right'].includes(info[i].location)) {
+                        dataHTML[info[i].location] += '<div class="'+getClass(opts)+'" style="'+style+'">'+info[i].text+'</div>';
+                    }
+                }
+                html += '<div class="'+getClass({'virtual-gamepad': true})+'" style="display: block;">';
+                html += '<div class="'+getClass({'top': true})+'">';
+                html += dataHTML.top;
+                html += '</div>';
+                html += '<div class="'+getClass({'left': true})+'">';
+                html += dataHTML.left;
+                html += '</div>';
+                html += '<div class="'+getClass({'center': true})+'">';
+                html += dataHTML.center;
+                html += '</div>';
+                html += '<div class="'+getClass({'right': true})+'">';
+                html += dataHTML.right;
+                html += '</div></div>';
+                _0x378b5c.virtualGamepadContainer.innerHTML = html;
+                _0x132da7(_0x378b5c.virtualGamepadContainer, !_0x1ed80b);
+                
+                let _0x2c1832 = getClass({
+                        'virtual-gamepad': true
                     }),
-                    _0x378b5c.simulateInputFn(_0xf1bb97, index, value))
-                  : _0x378b5c.connection.send(
-                      JSON.stringify({
-                        act: "sync-control",
-                        value: [
-                          ""
-                            .concat(_0xf1bb97, "|")
-                            .concat(index, "|")
-                            .concat(value, "|")
-                            .concat(_0x52e1f4),
-                        ],
-                      }),
-                      _0x378b5c.roomMaster
-                    )),
-              (_0x2c63cc[index] = value));
-          }
-        } else
-          _0x378b5c.disableInput ||
-            _0x378b5c.simulateInputFn(player, index, value);
-      };
-      _0x378b5c.syncInput = _0x378b5c.simulateInput;
-      window.simulateInput = _0x378b5c.simulateInput;
-      _0x378b5c.toggleShader = _0x27f4c4.Module.cwrap("shader_enable", "null", [
-        "number",
-      ]);
-      if (_this.coreVer !== 2) {
-        _0x378b5c.getStateInfo = _0x27f4c4.Module.cwrap(
-          "get_state_info",
-          "string",
-          []
-        );
-      } else {
-        _0x378b5c.getInfoOfState = _0x27f4c4.Module.cwrap(
-          "get_state_info",
-          "string",
-          []
-        );
-        _0x378b5c.getStateInfo1 = _0x27f4c4.Module.cwrap(
-          "save_state_info",
-          "null",
-          []
-        );
-        _0x378b5c.getStateInfo = function () {
-          _0x378b5c.getStateInfo1();
-          return new Promise(function (resolve, reject) {
-            let a = _0x378b5c.getInfoOfState();
-            if (a) {
-              resolve(a);
-              return;
+                    _0x2ec721 = getClass({
+                        'touch': true
+                    });
+                if (! _0x59aa33.isIos) {
+                    _0x1093f4.call(this, _0x530042.call(this, '.' .concat(_0x2c1832)), 'touchmove', function(event) {
+                        event.stopPropagation();
+                    });
+                }
+                function createDPad(config) {
+                    let _0xb30294 = config.container,
+                        _0x46ee07 = config.event;
+                    if (typeof _0x46ee07 !== 'function') (_0x46ee07 = function () {});
+                    let _0x2af034 = _0x428003('div', {class: getClass({"dpad-bg": true})}),
+                        _0x573eda = _0x428003('div', {class: getClass({"dpad-front": true})});
+                    
+                    function _0x12b76b(event) {
+                        let _0x243fd0 = event.targetTouches[0];
+                        if (_0x243fd0) {
+                            let _0x30ad4f = _0x573eda.getBoundingClientRect(),
+                                _0x3f2d89 = _0x243fd0.clientX - _0x30ad4f.left - _0x573eda.clientWidth / 2,
+                                _0x23d024 = _0x243fd0.clientY - _0x30ad4f.top - _0x573eda.clientHeight / 2,
+                                _0x10098e = 0,
+                                _0x419bd0 = 0,
+                                _0x21a1ad = 0,
+                                _0x1f5439 = 0,
+                                _0x4fda8c = Math.atan(_0x3f2d89 / _0x23d024) / (Math.PI / 180);
+                            
+                            _0x23d024 <= -10 && (_0x10098e = 1);
+                            _0x23d024 >= 10 && (_0x419bd0 = 1);
+                            _0x3f2d89 >= 10 && (_0x1f5439 = 1, _0x21a1ad = 0, (_0x4fda8c < 0 && _0x4fda8c >= -35 || _0x4fda8c > 0 && _0x4fda8c <= 35) && (_0x1f5439 = 0), _0x10098e = _0x4fda8c < 0 && _0x4fda8c >= -55 ? 1 : 0, _0x419bd0 = _0x4fda8c > 0 && _0x4fda8c <= 55 ? 1 : 0);
+                            _0x3f2d89 <= -10 && (_0x1f5439 = 0, _0x21a1ad = 1, (_0x4fda8c < 0 && _0x4fda8c >= -35 || _0x4fda8c > 0 && _0x4fda8c <= 35) && (_0x21a1ad = 0), _0x10098e = _0x4fda8c > 0 && _0x4fda8c <= 55 ? 1 : 0, _0x419bd0 = _0x4fda8c < 0 && _0x4fda8c >= -55 ? 1 : 0);
+                            _0x2af034.classList.toggle(getClass({"dpad-right": true}), _0x1f5439);
+                            _0x2af034.classList.toggle(getClass({"dpad-left": true}), _0x21a1ad);
+                            _0x2af034.classList.toggle(getClass({"dpad-up": true}), _0x10098e);
+                            _0x2af034.classList.toggle(getClass({"dpad-down": true}), _0x419bd0);
+                            _0x46ee07(_0x10098e, _0x419bd0, _0x21a1ad, _0x1f5439);
+                        }
+                        event.stopPropagation();
+                    }
+                    function _0x320749(event) {
+                        _0x46ee07(0, 0, 0, 0);
+                        _0x2af034.classList.toggle(getClass({"dpad-up": true}), false);
+                        _0x2af034.classList.toggle(getClass({"dpad-down": true}), false);
+                        _0x2af034.classList.toggle(getClass({"dpad-right": true}), false);
+                        _0x2af034.classList.toggle(getClass({"dpad-left": true}), false);
+                        event.stopPropagation();
+                    }
+                    
+                    _0x2af034.innerHTML = '<div class="'.concat(getClass({"dpad-1": true}), '"><div class="').concat(getClass({"dpad-1-bg": true}), '"></div></div>\n    <div class="').concat(getClass({"dpad-2": true}), '"><div class="').concat(getClass({"dpad-2-bg": true}), '"></div></div>');
+                    _0xb30294.append(_0x2af034);
+                    _0xb30294.append(_0x573eda);
+                    _0x1093f4.call(_this, _0x573eda, 'touchstart touchmove', _0x12b76b);
+                    _0x1093f4.call(_this, _0x573eda, 'touchend touchcancel', _0x320749);
+                }
+                info.forEach((dpad, index) => {
+                    if (dpad.type !== 'dpad') return;
+                    let opts = {};
+                    if (leftHandedMode && ['left', 'right'].includes(dpad.location)) {
+                        dpad.location = (dpad.location==='left') ? 'right' : 'left';
+                        const amnt = JSON.parse(JSON.stringify(dpad));
+                        if (amnt.left) {
+                            dpad.right = amnt.left;
+                        }
+                        if (amnt.right) {
+                            dpad.left = amnt.right;
+                        }
+                    }
+                    opts[dpad.location.toLowerCase()] = true;
+                    const parent = _0x530042.call(this, '.'.concat(getClass({
+                        'ejs-virtual-gamepad': true
+                    }), ' .').concat(getClass(opts)));
+                    opts['dpad_'+index] = true;
+                    const elem = _0x428003('div', {
+                        'class': '.'.concat(getClass({
+                            'ejs-virtual-gamepad': true,
+                            'dpad-container': true
+                        }), ' .').concat(getClass(opts))
+                    });
+                    let style = '';
+                    if (dpad.left) {
+                        style += 'left:'+dpad.left+';';
+                    }
+                    if (dpad.right) {
+                        style += 'right:'+dpad.right+';';
+                    }
+                    if (dpad.top) {
+                        style += 'top:'+dpad.top+';';
+                    }
+                    elem.style = style;
+                    parent.appendChild(elem);
+                    createDPad({container: elem, event: function(up, down, left, right) {
+                        if (dpad.joystickInput) {
+                            if (up === 1) up=0x7fff;
+                            if (down === 1) up=0x7fff;
+                            if (left === 1) up=0x7fff;
+                            if (right === 1) up=0x7fff;
+                        }
+                        _0x378b5c.syncInput(0, dpad.inputValues[0], up);
+                        _0x378b5c.syncInput(0, dpad.inputValues[1], down);
+                        _0x378b5c.syncInput(0, dpad.inputValues[2], left);
+                        _0x378b5c.syncInput(0, dpad.inputValues[3], right);
+                    }});
+                })
+                
+                
+                if (this.zoneObj) {
+                    this.zoneObj.forEach((zone) => {
+                        zone.destroy();
+                    })
+                }
+                this.zoneObj = [];
+                let zone;
+                info.forEach((zone, index) => {
+                    if (zone.type !== 'zone') return;
+                    let opts = {};
+                    if (leftHandedMode && ['left', 'right'].includes(zone.location)) {
+                        zone.location = (zone.location==='left') ? 'right' : 'left';
+                        const amnt = JSON.parse(JSON.stringify(zone));
+                        if (amnt.left) {
+                            zone.right = amnt.left;
+                        }
+                        if (amnt.right) {
+                            zone.left = amnt.right;
+                        }
+                    }
+                    opts[zone.location.toLowerCase()] = true;
+                    const parent = _0x530042.call(this, '.'.concat(getClass({
+                        'ejs-virtual-gamepad': true,
+                    }), ' .').concat(getClass(opts)));
+                    opts['zone_'+index] = true;
+                    const elem = _0x428003('div', {
+                        'class': '.'.concat(getClass({
+                            'ejs-virtual-gamepad': true,
+                        }), ' .').concat(getClass(opts))
+                    });
+                    parent.appendChild(elem);
+                    const zoneObj = _0x3a58c8.a.create({
+                        'zone': elem,
+                        'mode': 'static',
+                        'position': {
+                            'left': zone.left,
+                            'top': zone.top
+                        },
+                        'color': 'red'
+                    });
+                    zoneObj.on('end', function(_0x27f006, _0x1fb527) {
+                        _0x378b5c.syncInput(0, zone.inputValues[0], 0);
+                        _0x378b5c.syncInput(0, zone.inputValues[1], 0);
+                        _0x378b5c.syncInput(0, zone.inputValues[2], 0);
+                        _0x378b5c.syncInput(0, zone.inputValues[3], 0);
+                    });
+                    zoneObj.on('move', function(_0x1b060e, _0x4ae7d6) {
+                        const degree = _0x4ae7d6.angle.degree;
+                        const distance = _0x4ae7d6.distance;
+                        if (zone.joystickInput === true) {
+                            let _0x4773fe = 0, _0x4c3bc7 = 0;
+                            if (degree > 0 && degree <= 45) {
+                                _0x4773fe = distance / 50;
+                                _0x4c3bc7 = -0.022222222222222223 * degree * distance / 50;
+                            }
+                            if (degree > 45 && degree <= 90) {
+                                _0x4773fe = 0.022222222222222223 * (90 - degree) * distance / 50;
+                                _0x4c3bc7 = -distance / 50;
+                            }
+                            if (degree > 90 && degree <= 135) {
+                                _0x4773fe = 0.022222222222222223 * (90 - degree) * distance / 50;
+                                _0x4c3bc7 = -distance / 50;
+                            }
+                            if (degree > 135 && degree <= 180) {
+                                _0x4773fe = -distance / 50;
+                                _0x4c3bc7 = -0.022222222222222223 * (180 - degree) * distance / 50;
+                            }
+                            if (degree > 135 && degree <= 225) {
+                                _0x4773fe = -distance / 50;
+                                _0x4c3bc7 = -0.022222222222222223 * (180 - degree) * distance / 50;
+                            }
+                            if (degree > 225 && degree <= 270) {
+                                _0x4773fe = -0.022222222222222223 * (270 - degree) * distance / 50;
+                                _0x4c3bc7 = distance / 50;
+                            }
+                            if (degree > 270 && degree <= 315) {
+                                _0x4773fe = -0.022222222222222223 * (270 - degree) * distance / 50;
+                                _0x4c3bc7 = distance / 50;
+                            }
+                            if (degree > 315 && degree <= 359.9) {
+                                _0x4773fe = distance / 50;
+                                _0x4c3bc7 = 0.022222222222222223 * (360 - degree) * distance / 50;
+                            }
+                            if (_0x4773fe > 0) {
+                                _0x378b5c.syncInput(0, zone.inputValues[0], 0x7fff * _0x4773fe);
+                                _0x378b5c.syncInput(0, zone.inputValues[1], 0);
+                            } else {
+                                _0x378b5c.syncInput(0, zone.inputValues[1], 0x7fff * -_0x4773fe);
+                                _0x378b5c.syncInput(0, zone.inputValues[0], 0);
+                            }
+                            if (_0x4c3bc7 > 0) {
+                                _0x378b5c.syncInput(0, zone.inputValues[2], 0x7fff * _0x4c3bc7);
+                                _0x378b5c.syncInput(0, zone.inputValues[3], 0);
+                            } else {
+                                _0x378b5c.syncInput(0, zone.inputValues[3], 0x7fff * -_0x4c3bc7);
+                                _0x378b5c.syncInput(0, zone.inputValues[2], 0);
+                            }
+                            
+                        } else {
+                            if (degree >= 30 && degree < 150) {
+                                _0x378b5c.syncInput(0, zone.inputValues[0], 1);
+                            } else {
+                                window.setTimeout(function() {
+                                    _0x378b5c.syncInput(0, zone.inputValues[0], 0);
+                                }, 30);
+                            }
+                            if (degree >= 210 && degree < 330) {
+                                _0x378b5c.syncInput(0, zone.inputValues[1], 1);
+                            } else {
+                                window.setTimeout(function() {
+                                    _0x378b5c.syncInput(0, zone.inputValues[1], 0);
+                                }, 30);
+                            }
+                            if (degree >= 120 && degree < 240) {
+                                _0x378b5c.syncInput(0, zone.inputValues[2], 1);
+                            } else {
+                                window.setTimeout(function() {
+                                    _0x378b5c.syncInput(0, zone.inputValues[2], 0);
+                                }, 30);
+                            }
+                            if (degree >= 300 || degree >= 0 && degree < 60) {
+                                _0x378b5c.syncInput(0, zone.inputValues[3], 1);
+                            } else {
+                                window.setTimeout(function() {
+                                    _0x378b5c.syncInput(0, zone.inputValues[3], 0);
+                                }, 30);
+                            }
+                        }
+                    });
+                    this.zoneObj.push(zoneObj);
+                })
+                
+                let keys = [];
+                for (let i=0; i<info.length; i++) {
+                    if (info[i].type !== 'button') continue;
+                    let opts = {};
+                    opts['b_'+info[i].id.toLowerCase()] = true;
+                    let value;
+                    if (_this.newCores === 2 && info[i].input_new_cores) {
+                        value = info[i].input_new_cores;
+                    } else {
+                        value = info[i].input_value;
+                    }
+                    keys.push({id: opts, number: value});
+                }
+                keys.forEach((a) => {
+                    let element = _0x530042.call(_this, '.'.concat(_0x2c1832, ' .').concat(getClass(a.id)));
+                    if (!element) return;
+                    _0x1093f4.call(_this, element, 'touchstart touchend touchcancel', function(e) {
+                        if (e.type === 'touchend' || e.type === 'touchcancel') {
+                            _0x3a8e2f(e.target, _0x2ec721, false);
+                            window.setTimeout(function() {
+                                _0x378b5c.syncInput(0, a.number, 0);
+                            }, 30)
+                        } else {
+                            _0x3a8e2f(e.target, _0x2ec721, true);
+                            _0x378b5c.syncInput(0, a.number, 1)
+                        }
+                        e.preventDefault();
+                    })
+                });
+                
+                if (!forceUpdateHTML) {
+                    const menuButton = _0x428003('div', {
+                        'class': getClass({
+                            'ejs__widget': true,
+                            'ejs__widget_controls_toggle': true
+                        })
+                    }, '');
+                    menuButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>';
+                    _0x530042.call(this, ".".concat(getClass({ejs__widgets: true}))).appendChild(menuButton);
+                    let hideTimeout;
+                    _0x1093f4.call(this, menuButton, 'mousedown touchstart', function(e) {
+                        _0x3a8e2f(e.target, _0x2ec721, true);
+                        clearTimeout(hideTimeout);
+                        _0x5ab74d.toggleControls.call(_this, true);
+                        hideTimeout = setTimeout(function() {
+                            _0x5ab74d.toggleControls.call(_this, false);
+                        }, 5000)
+                    });
+                }
+            },
+            'setup': function() {
+                let _this = this;
+                if (!this.game) {
+                    console.warn('No game element found!');
+                    return;
+                }
+                _0x378b5c.playerName = _this.config.playerName;
+                _0x3a8e2f(this.elements.container, this.config.classNames.type, true);
+                this.elements.container.setAttribute('tabindex', '0');
+                if (this.color) {
+                    let _0x17edbf = function(_0x175d8e) {
+                        let _0x17edbf = _0x175d8e.toLowerCase();
+                        if (_0x17edbf && /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/ .test(_0x17edbf)) {
+                            if (0x4 === _0x17edbf.length) {
+                                for (let _0x2c1832 = '#', _0x4c881f = 1; _0x4c881f < 0x4; _0x4c881f += 1) _0x2c1832 += _0x17edbf.slice(_0x4c881f, _0x4c881f + 1).concat(_0x17edbf.slice(_0x4c881f, _0x4c881f + 1));
+                                _0x17edbf = _0x2c1832;
+                            }
+                            let _0x5ac4ff = [];
+                            for (let _0x324169 = 1; _0x324169 < 0x7; _0x324169 += 2) _0x5ac4ff.push(parseInt('0x' .concat(_0x17edbf.slice(_0x324169, _0x324169 + 2)), 0x10));
+                            return _0x5ac4ff;
+                        }
+                        return null;
+                    }(this.color);
+                    _0x17edbf && this.elements.container.setAttribute('style', '--ejs-primary-color: ' .concat(_0x17edbf[0], ', ').concat(_0x17edbf[1], ', ').concat(_0x17edbf[2]));
+                }
+                this.elements.wrapper = _0x428003('div', {
+                    'class': this.config.classNames.video
+                });
+                _0x580edd(this.game, this.elements.wrapper);
+                if ('video' !== _this.game.tagName.toLocaleLowerCase()) {
+                    let _0x2c1832 = this.config.volume;
+                    Object.defineProperty(_this.game, 'volume', {
+                        'get': function() {
+                            return _0x2c1832;
+                        },
+                        'set': function(_0x4cca18) {
+                            _0x2c1832 = _0x4cca18, _0xbae705.call(_this, _this.game, 'volumechange');
+                        }
+                    });
+                    let _0x541fe1 = _this.storage.get('muted');
+                    Object.defineProperty(_this.game, 'muted', {
+                        'get': function() {
+                            return _0x541fe1;
+                        },
+                        'set': function(_0x54b6e0) {
+                            let _0x2c1832 = !!_0x1e2c68.boolean(_0x54b6e0) && _0x54b6e0;
+                            _0x541fe1 = _0x2c1832, _0xbae705.call(_this, _this.game, 'volumechange');
+                        }
+                    });
+                }
+                window.addEventListener('beforeunload', function(_0x34b11a) {
+                    if (_this.started && _this.getStartName()) {
+                        _0x27f4c4.FS.syncfs(function() {});
+                        _0x378b5c.saveSavFiles();
+                        _0x27f4c4.FS.syncfs(function() {});
+                    }
+                }, true);
+                //Wille save savefiles to indexeddb
+                window.saveSaveFiles = function() {
+                    if (!_this.getStartName()) return;
+                    console.log('saving save files');
+                    _0x378b5c.saveSavFiles();
+                    _0x27f4c4.FS.syncfs(false, function() {});
+                }
+                setInterval(function() {
+                    if (_this.started) {
+                        saveSaveFiles();
+                    }
+                }, 60000) //60000 = 1 minute
+            },
+            'listeners': function() {
+                let _this = this;
+                const elem = _0x530042.call(_this, '.' .concat(getClass({
+                    'ejs__dialogs': true
+                })));
+                let counter = 0;
+                _0x1093f4.call(_this, elem, 'dragenter', function(e) {
+                    e.preventDefault();
+                    counter++;
+                    _0x132da7(_this.elements.dialogs.message, false);
+                });
+                _0x1093f4.call(_this, elem, 'dragover', function(e) {
+                    e.preventDefault();
+                });
+                _0x1093f4.call(_this, elem, 'dragleave', function(e) {
+                    e.preventDefault();
+                    counter--;
+                    if (counter === 0) {
+                        _0x132da7(_this.elements.dialogs.message, true);
+                    }
+                });
+                _0x1093f4.call(_this, elem, 'dragend', function(e) {
+                    e.preventDefault();
+                    counter = 0;
+                    _0x132da7(_this.elements.dialogs.message, true);
+                });
+                _0x1093f4.call(_this, elem, 'drop', function(e) {
+                    e.preventDefault();
+                    _0x132da7(_this.elements.dialogs.message, true);
+                    counter = 0;
+                    const items = e.dataTransfer.items;
+                    let file;
+                    for (let i=0; i<items.length; i++) {
+                        if (items[i].kind !== 'file') continue;
+                        file = items[i];
+                        break;
+                    }
+                    if (!file) return;
+                    const fileHandle = file.getAsFile();
+                    fileHandle.arrayBuffer().then(data => {
+                        _0x378b5c.loadState(new Uint8Array(data), 0);
+                    })
+                });
+                _this.elements.buttons.restart && _0x1093f4.call(_this, _this.elements.buttons.restart, 'click', function(_0x5cfc51) {
+                    _0x378b5c.restartGame();
+                    _0x378b5c.inputsData = {};
+                    if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
+                        (async () => {
+                            const state = await _0x378b5c.saveState();
+                            const file = new File([state], '0-game.state', {
+                                'type': '',
+                                'lastModified': new Date()
+                            });
+                            _0x378b5c.connection.shareFile(file);
+                            _0x378b5c.inputsData = {};
+                            _0x378b5c.wait = true;
+                            _0x378b5c.systemPause(1);
+                            _0x27f4c4.Module.pauseMainLoop();
+                            _0x378b5c.disableControl(true);
+                        })();
+                    }
+                    saveSaveFiles();
+                });
+                _this.elements.buttons.screenRecord && _0x1093f4.call(_this, _this.elements.buttons.screenRecord, 'click', function(_0x5cfc51) {
+                    if (! _this.recordData) {
+                        _this.recordData = {started:false, data:[], stopped: false};
+                    }
+                    if (! _this.recordData.started) { //start recording
+                        let options;
+                        if (MediaRecorder.isTypeSupported('video/webm; codecs=h264')) {
+                            options = {mimeType: 'video/webm; codecs=h264'};
+                        } else if (MediaRecorder.isTypeSupported('video/webm; codecs=H264')) {
+                            options = {mimeType: 'video/webm; codecs=H264'};
+                        } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
+                            options = {mimeType: 'video/webm; codecs=vp9'};
+                        } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp8')) {
+                            options = {mimeType: 'video/webm; codecs=vp8'};
+                        } else if (MediaRecorder.isTypeSupported('video/webm; codecs=avc1')) {
+                            options = {mimeType: 'video/webm; codecs=avc1'};
+                        } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9.0')) {
+                            options = {mimeType: 'video/webm; codecs=vp9.0'};
+                        } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp8.0')) {
+                            options = {mimeType: 'video/webm; codecs=vp8.0'};
+                        } else {
+                            options = {};
+                        }
+                        function gotStreams(stream) {
+                            _this.elements.buttons.screenRecord.querySelector('.'.concat(getClass({
+                                'ejs__tooltip': true
+                            }))).innerHTML = _this.localization('Stop Screen Recording');
+                            _this.recordData.stream = stream;
+                            _this.recordData.recorder = new MediaRecorder(_this.recordData.stream, options);
+                            _this.recordData.recorder.ondataavailable = function(e) {
+                                if (e.data.size > 0) {
+                                    _this.recordData.data.push(e.data)
+                                }
+                                if (_this.recordData.stopped) {
+                                    let a = document.createElement("a")
+                                    a.href = window.URL.createObjectURL(new Blob(_this.recordData.data, {type: "video/webm"}))
+                                    let aname;
+                                    if (typeof _this.gameName == 'string') {
+                                        aname = _this.gameName
+                                    }
+                                    a.download = aname ? '' .concat(aname, '-recording.webm') : 'record.webm';
+                                    a.click()
+                                    window.URL.revokeObjectURL(a.href)
+                                    delete _this.recordData
+                                    _this.elements.buttons.screenRecord.querySelector('.'.concat(getClass({
+                                        'ejs__tooltip': true
+                                    }))).innerHTML = _this.localization('Start Screen Recording');
+                                }
+                            }
+                            _this.recordData.recorder.start()
+                            _this.recordData.started = true
+                        }
+                        if (window.navigator && navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function') {
+                            _0x27f4c4.Module.pauseMainLoop();
+                            _this.playing = false;
+                            alert('Please check "share system audio" to have audio in the recording. We only need the audio stream so your entire screen will not be recorded');
+                            let time = setTimeout(function() {
+                                _this.playing = true;
+                                _0x27f4c4.Module.resumeMainLoop();
+                            }, 20000);
+                            navigator.mediaDevices.getDisplayMedia({
+                                audio: true,  //we only need the audio, we dont use the video stream at all
+                                video: {mediaSource: "screen"}
+                            }).then(function(stream) {
+                                let canvasStream = _0x27f4c4.Module.canvas.captureStream(30);
+                                try {
+                                    clearTimeout(time);
+                                }catch(e){}
+                                let audio = stream.getAudioTracks();
+                                for (let i=0; i<audio.length; i++) {
+                                    canvasStream.addTrack(audio[i]);
+                                }
+                                gotStreams(canvasStream);
+                                _this.playing = true;
+                                _0x27f4c4.Module.resumeMainLoop();
+                            })
+                        } else {
+                            let canvasStream = _0x27f4c4.Module.canvas.captureStream(30);
+                            gotStreams(canvasStream);
+                        }
+                    } else if (_this.recordData.started) { //stop recording
+                        _this.recordData.recorder.stop()
+                        _this.recordData.stopped = true
+                    }
+                    
+                });
+                _this.elements.buttons.cacheManager && _0x1093f4.call(_this, _this.elements.buttons.cacheManager, 'click', function(_0x5cfc51) {
+                    if (_0x27f4c4.romdb) {
+                        _0x132da7(_this.elements.dialogs.cache, false);
+                        let _0x3360eb = _this.elements.dialogs.cache.querySelector('.' .concat(_0x378b5c.classNames['dialog-content']));
+                        _0x3360eb.innerHTML = '<div>'+_this.localization('Loading')+'</div>';
+                        _0x27f4c4.romdb.getAll(function(_0x43586d) {
+                            if (_0x43586d) {
+                                let _0x275730 = _0x428003('table', {
+                                    'style': 'width:100%;padding-left:10px;text-align:left'
+                                }),
+                                    _0x1ab9e9 = _0x428003('tbody');
+                                _0x43586d.length > 0 ? (_0x3360eb.innerHTML = '', _0x43586d.forEach(function(_0x32b0b7, _0x2d0e11) {
+                                    if (_0x32b0b7.key && !/-part-\d+$/ .test(_0x32b0b7.key)) {
+                                        let _0x277c67 = [_0x32b0b7.key];
+                                        for (let _0x3360eb = Math.ceil(_0x32b0b7.filesize / 0x6400000), _0x3edb35 = 1; _0x3edb35 < _0x3360eb; _0x3edb35 += 1) _0x277c67.push('' .concat(_0x32b0b7.key, '-part-').concat(_0x3edb35));
+                                        let _0x3e31f6 = _0x428003('tr'),
+                                            _0x5b75bd = _0x428003('td'),
+                                            _0x227405 = _0x428003('td'),
+                                            _0xac150b = _0x428003('td');
+                                        _0x5b75bd.innerHTML = _0x32b0b7.filename, _0x227405.innerHTML = function(_0x1858c1) {
+                                            let _0x2d0e11 = -1;
+                                            do {
+                                                _0x1858c1 /= 0x400, _0x2d0e11++;
+                                            } while (_0x1858c1 > 0x400);
+                                            return Math.max(_0x1858c1, 0.1).toFixed(1) + [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'][_0x2d0e11];
+                                        }(_0x32b0b7.filesize), _0xac150b.innerHTML = '<a href="#" onclick="return false">Remove</a>', _0x3e31f6.appendChild(_0x5b75bd), _0x3e31f6.appendChild(_0x227405), _0x3e31f6.appendChild(_0xac150b), _0x1ab9e9.appendChild(_0x3e31f6), _0xac150b.querySelector('a').onclick = function(_0x16f22a) {
+                                            _0x27f4c4.romdb.removeBatch(_0x277c67);
+                                            try {
+                                                _0x1ab9e9.removeChild(_0x3e31f6);
+                                            } catch (_0x353628) {}
+                                            return _0x16f22a.stopPropagation(), false;
+                                        };
+                                    }
+                                }), _0x275730.appendChild(_0x1ab9e9), _0x3360eb.appendChild(_0x275730)) : _0x3360eb.innerHTML = '<div style="text-align:center">'+_this.localization('Empty')+'</div>';
+                            } else _0x3360eb.innerHTML = '<div style="text-align:center">'+_this.localization('Empty')+'</div>';
+                        }, function() {});
+                    }
+                    return false;
+                })
+                _this.elements.buttons.play && Array.from(_this.elements.buttons.play).forEach(function(_0x24495b) {
+                    _0x1093f4.call(_this, _0x24495b, 'click', function(_0x966382) {
+                        if (_this.playing) {
+                            _this.playing = false;
+                            _0x27f4c4.Module.pauseMainLoop();
+                            if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
+                                _0x378b5c.connection.send(JSON.stringify({
+                                    'act': 'pause'
+                                }))
+                            }
+                            _0xbae705.call(_this, _this.elements.container, 'pause', false, {
+                                'pause': true
+                            })
+                        } else {
+                            _this.playing = true;
+                            _0x27f4c4.Module.resumeMainLoop();
+                            if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
+                                _0x378b5c.connection.send(JSON.stringify({
+                                    'act': 'resume'
+                                }))
+                            }
+                            _0xbae705.call(_this, _this.elements.container, 'pause', false, {
+                                'pause': false
+                            });
+                        }  
+                    });
+                }), _this.elements.buttons.netplay && _0x1093f4.call(_this, _this.elements.buttons.netplay, 'click', function(_0x2317b9) {
+                    if (window.EJS_TURN_URLS !== null && !window.EJS_TURN_URLS) {
+                        (async function(server) {
+                            try {
+                                let resp = await fetch(server + 'webrtc');
+                                window.EJS_TURN_URLS = JSON.parse(await resp.text());
+                            } catch(e) {
+                                window.EJS_TURN_URLS = null;
+                                console.warn("Could not contact netplay server", e);
+                            }
+                        })(_this.listUrl);
+                    }
+                    _0x378b5c.disableControl(true);
+                    _0x132da7(_this.elements.dialogs.netplay, false);
+                    if (_0x378b5c.players.length > 0) {
+                        _0x378b5c.openRoom(_0xa88a13);
+                    } else {
+                        _0x378b5c.stopLoadRooms();
+                        _0x378b5c.loadRoomsList();
+                    }
+                    if (!_0x378b5c.playerName) {
+                        _0x4d8495.show('modal-9de6c4e9ce2b9361', {
+                            'closeByEsckey': false
+                        });
+                    }
+                }), _this.elements.buttons.cheat && _0x1093f4.call(_this, _this.elements.buttons.cheat, 'click', function(_0x44b01a) {
+                    _0x132da7(_this.elements.dialogs.cheat, false);
+                });
+                _this.game.stateloadField = _0x428003('input');
+                _this.game.stateloadField.type = 'file';
+                _this.game.stateloadField.onchange = function _0x17edbf(_0xcd4599) {
+                    let _0xfd246e, _0x3fdd71 = _0xcd4599.target.files;
+                    _0x3fdd71.length > 0 && ((_0xfd246e = new FileReader()).file_name = _0x3fdd71[0].name, _0xfd246e.onload = function() {
+                        EJS_loadState(new Uint8Array(_0xfd246e.result));
+                    }, _0xfd246e.readAsArrayBuffer(_0x3fdd71[0])), _this.game.stateloadField = _0x428003('input'), _this.game.stateloadField.type = 'file', _this.game.stateloadField.onchange = _0x17edbf;
+                };
+                _0x1093f4.call(_this, _this.elements.container, 'loadstate', function(_0x13504c) {
+                    if (_0x378b5c.saveLoadDB.call(_this, 'load')) {
+                        return;
+                    }
+                    _0x1e2c68.function(_this.config.onloadstate) ? _this.config.onloadstate.call(null, _this.loadState) : _this.game.stateloadField.click(), _this.elements.container.focus();
+                });
+                document.addEventListener('visibilitychange', function() {
+                    'hidden' === document.visibilityState ? console.log('hidden') : console.log('active');
+                });
+            },
+            'bindFunction': function() {
+                let _this = this,
+                    _0x17edbf = getSystem(_this.system, true);
+                if (_0x27f4c4.Module && _0x27f4c4.Module._set_volume) {
+                    let _0x2c1832 = _0x27f4c4.Module.cwrap('set_volume', 'null', ['number']);
+                    _0x378b5c.setVolume = function() {
+                        let _0x17edbf = 0;
+                        _this.volume < 1 && (_0x17edbf = 0 === _this.volume ? -0x50 : 0x1e * _this.volume - 0x1e, _0x2c1832(_0x17edbf)), _this.muted && (_0x17edbf = -0x50), _0x2c1832(_0x17edbf);
+                    };
+                }
+                _0x378b5c.getSaveFilePath = _0x27f4c4.Module.cwrap('save_file_path', 'string', []);
+                // Returns a Uint8Array of the save file
+                _0x378b5c.readSaveFile = function() {
+                    return FS.readFile(_0x378b5c.getSaveFilePath());
+                }
+                _0x378b5c.setVariable = _0x27f4c4.Module.cwrap('set_variable', 'null', ['string', 'string']);
+                _0x378b5c.simulateInputFn = _0x27f4c4.Module.cwrap('simulate_input', 'null', ['number', 'number', 'number']);
+                let _0x2c63cc = {
+                    0: null,
+                    1: null,
+                    2: null,
+                    3: null,
+                    4: null,
+                    5: null,
+                    6: null,
+                    7: null,
+                    8: null,
+                    9: null,
+                    10: null,
+                    11: null,
+                    12: null,
+                    13: null,
+                    14: null,
+                    15: null,
+                    16: null,
+                    17: null,
+                    18: null,
+                    19: null,
+                    20: null,
+                    21: null,
+                    22: null,
+                    23: null,
+                    24: null,
+                    25: null,
+                    26: null,
+                    27: null,
+                    28: null,
+                    29: null,
+                    30: null,
+                    31: null
+                };
+                _0x378b5c.simulateInput = function(player, index, value) {
+                    if (_0x378b5c.connected) {
+                        if (_this.playing && !_0x378b5c.disableInput) {
+                            var _0x35b9c1 = _0x378b5c.connection.userid,
+                                _0x4d96ad = _0x378b5c.roomMaster === _0x35b9c1,
+                                _0xf1bb97 = _0x378b5c.players.indexOf(_0x35b9c1),
+                                _0x52e1f4 = _0x378b5c.currentFrameNum();
+                            player >> 0x0 == 0x0 && (_0x2c63cc[index] !== value && (_0x4d96ad ? (_0x378b5c.inputsData[_0x52e1f4] || (_0x378b5c.inputsData[_0x52e1f4] = []), _0x378b5c.inputsData[_0x52e1f4].push({
+                                'index': _0xf1bb97,
+                                'key': index,
+                                'status': value,
+                                'frame': _0x52e1f4
+                            }),_0x378b5c.simulateInputFn(_0xf1bb97, index, value)) : _0x378b5c.connection.send(JSON.stringify({
+                                'act': 'sync-control',
+                                'value': ['' .concat(_0xf1bb97, '|').concat(index, '|').concat(value, '|').concat(_0x52e1f4)]
+                            }), _0x378b5c.roomMaster)), _0x2c63cc[index] = value);
+                        }
+                    } else _0x378b5c.disableInput || _0x378b5c.simulateInputFn(player, index, value);
+                };
+                _0x378b5c.syncInput = _0x378b5c.simulateInput;
+                window.simulateInput = _0x378b5c.simulateInput;
+                _0x378b5c.toggleShader = _0x27f4c4.Module.cwrap('shader_enable', 'null', ['number']);
+                if (_this.coreVer !== 2) {
+                    _0x378b5c.getStateInfo = _0x27f4c4.Module.cwrap('get_state_info', 'string', []);
+                } else {
+                    _0x378b5c.getInfoOfState = _0x27f4c4.Module.cwrap('get_state_info', 'string', []);
+                    _0x378b5c.getStateInfo1 = _0x27f4c4.Module.cwrap('save_state_info', 'null', []);
+                    _0x378b5c.getStateInfo = function() {
+                        _0x378b5c.getStateInfo1();
+                        return new Promise(function(resolve, reject) {
+                            let a = _0x378b5c.getInfoOfState();
+                            if (a) {
+                                resolve(a);
+                                return;
+                            }
+                            let b = setInterval(function() {
+                                a = _0x378b5c.getInfoOfState();
+                                if (a) {
+                                    clearInterval(b);
+                                    resolve(a);
+                                }
+                            }, 50)
+                        });
+                    }
+                }
+                _0x378b5c.saveState = async function() {
+                    let _0xa88a14;
+                    let _0x17edbf;
+                    if (_this.coreVer !== 2) {
+                        _0x17edbf = _0x378b5c.getStateInfo().split('|');
+                    } else {
+                        _0x17edbf = (await _0x378b5c.getStateInfo()).split('|');
+                    }
+                    let _0x2c1832 = _0x17edbf[0] >> 0;
+                    if (_0x2c1832 > 0) {
+                        _0xa88a14 = new Uint8Array(_0x2c1832);
+                        for (let _0x2ef6be = _0x17edbf[1] >> 0, _0x3cc34b = 0; _0x3cc34b < _0x2c1832; _0x3cc34b++) _0xa88a14[_0x3cc34b] = _0x27f4c4.Module.getValue(_0x2ef6be + _0x3cc34b);
+                    }
+                    return _0xa88a14;
+                };
+                let _0x25a7a2 = _0x27f4c4.Module.cwrap('load_state', 'number', ['string', 'number']);
+                _0x378b5c.loadState = function(_0x4389ae, _0x1d4918) {
+                    let _0x91cd69;
+                    _0x91cd69 = _0x4389ae;
+                    try {
+                        _0x27f4c4.FS.unlink('game.state');
+                    } catch(e){}
+                    _0x27f4c4.FS.createDataFile('/', 'game.state', _0x91cd69, true, true);
+                    null === _0x1d4918 && (_0x1d4918 = 0);
+                    if ('arcade' === _0x17edbf) {
+                        setTimeout(function() {
+                            _0x378b5c.getStateInfo();
+                            _0x25a7a2('game.state', _0x1d4918);
+                            _0x27f4c4.FS.unlink('game.state');
+                        }, 0xa)
+                    } else {
+                        _0x25a7a2('game.state', _0x1d4918);
+                        setTimeout(function() {
+                            _0x27f4c4.FS.unlink('game.state');
+                        }, 100)
+                    }
+                    if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
+                        (async () => {
+                            const state = await _0x378b5c.saveState();
+                            const file = new File([state], '0-game.state', {
+                                'type': '',
+                                'lastModified': new Date()
+                            });
+                            _0x378b5c.connection.shareFile(file);
+                            _0x378b5c.inputsData = {};
+                            _0x378b5c.wait = true;
+                            _0x378b5c.systemPause(1);
+                            _0x27f4c4.Module.pauseMainLoop();
+                            _0x378b5c.disableControl(true);
+                        })();
+                    }
+                    _this.elements.container.focus();
+                };
+                _0x27f4c4.Module._set_cheat && (_0x378b5c.setCheat = _0x27f4c4.Module.cwrap('set_cheat', 'number', ['number', 'number', 'string']));
+                _0x27f4c4.Module._reset_cheat && (_0x378b5c.resetCheat = _0x27f4c4.Module._reset_cheat);
+                _0x378b5c.quickSaveState = async function() {
+                    if (_this.started && !_0x378b5c.connected) {
+                        if (_this.statesSupported === false) {
+                            _0x378b5c.doMessageTransition('CANNOT CURRENTLY LOAD STATE');
+                            return;
+                        }
+                        let slot;
+                        if (_0x2593da && typeof _0x2593da.getCoreOptionsValue == 'function') {
+                            slot = _0x2593da.getCoreOptionsValue('save-state-slot');
+                            if (! slot) {
+                                slot = 1;
+                            }
+                        } else {
+                            slot = 1;
+                        }
+                        let name = slot + '-quick.state';
+                        try {
+                            _0x27f4c4.FS.unlink(name);
+                        } catch (_0x4b4d4c) {}
+                        try {
+                            let _0x17edbf = await _0x378b5c.saveState();
+                            _0x27f4c4.FS.createDataFile('/', name, _0x17edbf, true, true);
+                            _0x378b5c.doMessageTransition('STATE SAVED TO SLOT ' + slot);
+                        } catch(e) {
+                            console.warn(e);
+                            _0x378b5c.doMessageTransition('FAILED TO SAVE STATE TO SLOT ' + slot);
+                        }
+                        saveSaveFiles();
+                    }
+                };
+                _0x378b5c.saveMsgTransitions = null;
+                _0x378b5c.doMessageTransition = function(message) {
+                    _this.elements.widgets.stateInfoDiv.innerText = message;
+                    clearTimeout(_0x378b5c.saveMsgTransitions);
+                    _0x378b5c.saveMsgTransitions = setTimeout(function() {
+                        _this.elements.widgets.stateInfoDiv.innerText = '';
+                    }, 1500)
+                }
+                _0x378b5c.quickLoadState = function() {
+                    if (_this.started && !_0x378b5c.connected) {
+                        if (_this.statesSupported === false) {
+                            _0x378b5c.doMessageTransition('CANNOT CURRENTLY LOAD STATE');
+                            return;
+                        }
+                        let slot;
+                        if (_0x2593da && typeof _0x2593da.getCoreOptionsValue == 'function') {
+                            slot = _0x2593da.getCoreOptionsValue('save-state-slot');
+                            if (! slot) {
+                                slot = 1;
+                            }
+                        } else {
+                            slot = 1;
+                        }
+                        let name = slot + '-quick.state';
+                        let success = true;
+                        try {
+                            _0x25a7a2(name, 0);
+                            if ('arcade' === _0x17edbf) {
+                                setTimeout(function() {
+                                    _0x378b5c.getStateInfo();
+                                    _0x25a7a2(name, 0);
+                                }, 0xa);
+                            }
+                        } catch (_0x4ee386) {
+                            success = false;
+                        }
+                        if (! success) {
+                            _0x378b5c.doMessageTransition('FAILED TO LOAD STATE FROM SLOT ' + slot);
+                        } else {
+                            _0x378b5c.doMessageTransition('LOADED STATE FROM SLOT ' + slot);
+                        }
+                        saveSaveFiles();
+                    }
+                };
+                _0x378b5c.changeStateSlot = function(e) {
+                    let slot;
+                    if (_0x2593da && typeof _0x2593da.getCoreOptionsValue == 'function') {
+                        slot = _0x2593da.getCoreOptionsValue('save-state-slot');
+                    }
+                    if (!slot) {
+                        slot = 1;
+                    }
+                    let newSlot;
+                    if (typeof e != 'number') {
+                        newSlot = slot + 1;
+                    } else {
+                        newSlot = e;
+                    }
+                    if (newSlot > 9) {
+                        newSlot = 1;
+                    }
+                    _0x7f9f36.updateCoreOptions.call(_this, 'save-state-slot', newSlot);
+                    _0x378b5c.doMessageTransition('SET SAVE STATE SLOT TO ' + newSlot);
+                };
+                window.EJS_loadState = function(data) {
+                    _0x378b5c.loadState(data, 0);
+                    setTimeout(() => {
+                        if (_0x378b5c.connected) {
+                            var file = new File([data], '0-game.state', {
+                                'type': '',
+                                'lastModified': new Date()
+                            });
+                            _0x378b5c.connection.shareFile(file);
+                            _0x378b5c.inputsData = {};
+                            _0x378b5c.wait = true;
+                            _0x378b5c.systemPause(1);
+                            _0x27f4c4.Module.pauseMainLoop();
+                            _0x378b5c.disableControl(true);
+                        }
+                    }, 0x1e);
+                };
+                window.EJS_saveState = function() {
+                    return _0x378b5c.saveState();
+                }
+                let _0x840cf4 = _0x27f4c4.Module.cwrap('cmd_take_screenshot', '', []);
+                _0x378b5c.getScreenData = function() {
+                    _0x840cf4();
+                    return _0x27f4c4.FS.readFile('screenshot.png');
+                };
+                _0x378b5c.restartGame = _0x27f4c4.Module.cwrap('system_restart', '', []);
+                _0x378b5c.currentFrameNum = _0x27f4c4.Module.cwrap('get_current_frame_count', '', []);
+                _0x378b5c.saveSavFiles = _0x27f4c4.Module.cwrap('cmd_savefiles', '', []);
+                _0x27f4c4.Module._get_core_options && (_0x378b5c.getGameCoreOptions = _0x27f4c4.Module.cwrap('get_core_options', 'string', []));
+                _0x378b5c.systemPause = function(e) {
+                    return false;
+                };
+                _0x378b5c.controllers = _0x2593da.storage.get('controllers');
+                _0x378b5c.controllers || (_0x378b5c.controllers = JSON.parse(JSON.stringify(_0x378b5c.defaultControllers)));
             }
-            let b = setInterval(function () {
-              a = _0x378b5c.getInfoOfState();
-              if (a) {
-                clearInterval(b);
-                resolve(a);
-              }
-            }, 50);
-          });
-        };
-      }
-      _0x378b5c.saveState = async function () {
-        let _0xa88a14;
-        let _0x17edbf;
-        if (_this.coreVer !== 2) {
-          _0x17edbf = _0x378b5c.getStateInfo().split("|");
-        } else {
-          _0x17edbf = (await _0x378b5c.getStateInfo()).split("|");
         }
-        let _0x2c1832 = _0x17edbf[0] >> 0;
-        if (_0x2c1832 > 0) {
-          _0xa88a14 = new Uint8Array(_0x2c1832);
-          for (
-            let _0x2ef6be = _0x17edbf[1] >> 0, _0x3cc34b = 0;
-            _0x3cc34b < _0x2c1832;
-            _0x3cc34b++
-          )
-            _0xa88a14[_0x3cc34b] = _0x27f4c4.Module.getValue(
-              _0x2ef6be + _0x3cc34b
-            );
-        }
-        return _0xa88a14;
-      };
-      let _0x25a7a2 = _0x27f4c4.Module.cwrap("load_state", "number", [
-        "string",
-        "number",
-      ]);
-      _0x378b5c.loadState = function (_0x4389ae, _0x1d4918) {
-        let _0x91cd69;
-        _0x91cd69 = _0x4389ae;
-        try {
-          _0x27f4c4.FS.unlink("game.state");
-        } catch (e) {}
-        _0x27f4c4.FS.createDataFile("/", "game.state", _0x91cd69, true, true);
-        null === _0x1d4918 && (_0x1d4918 = 0);
-        if ("arcade" === _0x17edbf) {
-          setTimeout(function () {
-            _0x378b5c.getStateInfo();
-            _0x25a7a2("game.state", _0x1d4918);
-            _0x27f4c4.FS.unlink("game.state");
-          }, 0xa);
-        } else {
-          _0x25a7a2("game.state", _0x1d4918);
-          setTimeout(function () {
-            _0x27f4c4.FS.unlink("game.state");
-          }, 100);
-        }
-        if (_0x378b5c.connected && _0x378b5c.connection.isInitiator) {
-          (async () => {
-            const state = await _0x378b5c.saveState();
-            const file = new File([state], "0-game.state", {
-              type: "",
-              lastModified: new Date(),
-            });
-            _0x378b5c.connection.shareFile(file);
-            _0x378b5c.inputsData = {};
-            _0x378b5c.wait = true;
-            _0x378b5c.systemPause(1);
-            _0x27f4c4.Module.pauseMainLoop();
-            _0x378b5c.disableControl(true);
-          })();
-        }
-        _this.elements.container.focus();
-      };
-      _0x27f4c4.Module._set_cheat &&
-        (_0x378b5c.setCheat = _0x27f4c4.Module.cwrap("set_cheat", "number", [
-          "number",
-          "number",
-          "string",
-        ]));
-      _0x27f4c4.Module._reset_cheat &&
-        (_0x378b5c.resetCheat = _0x27f4c4.Module._reset_cheat);
-      _0x378b5c.quickSaveState = async function () {
-        if (_this.started && !_0x378b5c.connected) {
-          if (_this.statesSupported === false) {
-            _0x378b5c.doMessageTransition("CANNOT CURRENTLY LOAD STATE");
-            return;
-          }
-          let slot;
-          if (_0x2593da && typeof _0x2593da.getCoreOptionsValue == "function") {
-            slot = _0x2593da.getCoreOptionsValue("save-state-slot");
-            if (!slot) {
-              slot = 1;
-            }
-          } else {
-            slot = 1;
-          }
-          let name = slot + "-quick.state";
-          try {
-            _0x27f4c4.FS.unlink(name);
-          } catch (_0x4b4d4c) {}
-          try {
-            let _0x17edbf = await _0x378b5c.saveState();
-            _0x27f4c4.FS.createDataFile("/", name, _0x17edbf, true, true);
-            _0x378b5c.doMessageTransition("STATE SAVED TO SLOT " + slot);
-          } catch (e) {
-            console.warn(e);
-            _0x378b5c.doMessageTransition(
-              "FAILED TO SAVE STATE TO SLOT " + slot
-            );
-          }
-          saveSaveFiles();
-        }
-      };
-      _0x378b5c.saveMsgTransitions = null;
-      _0x378b5c.doMessageTransition = function (message) {
-        _this.elements.widgets.stateInfoDiv.innerText = message;
-        clearTimeout(_0x378b5c.saveMsgTransitions);
-        _0x378b5c.saveMsgTransitions = setTimeout(function () {
-          _this.elements.widgets.stateInfoDiv.innerText = "";
-        }, 1500);
-      };
-      _0x378b5c.quickLoadState = function () {
-        if (_this.started && !_0x378b5c.connected) {
-          if (_this.statesSupported === false) {
-            _0x378b5c.doMessageTransition("CANNOT CURRENTLY LOAD STATE");
-            return;
-          }
-          let slot;
-          if (_0x2593da && typeof _0x2593da.getCoreOptionsValue == "function") {
-            slot = _0x2593da.getCoreOptionsValue("save-state-slot");
-            if (!slot) {
-              slot = 1;
-            }
-          } else {
-            slot = 1;
-          }
-          let name = slot + "-quick.state";
-          let success = true;
-          try {
-            _0x25a7a2(name, 0);
-            if ("arcade" === _0x17edbf) {
-              setTimeout(function () {
-                _0x378b5c.getStateInfo();
-                _0x25a7a2(name, 0);
-              }, 0xa);
-            }
-          } catch (_0x4ee386) {
-            success = false;
-          }
-          if (!success) {
-            _0x378b5c.doMessageTransition(
-              "FAILED TO LOAD STATE FROM SLOT " + slot
-            );
-          } else {
-            _0x378b5c.doMessageTransition("LOADED STATE FROM SLOT " + slot);
-          }
-          saveSaveFiles();
-        }
-      };
-      _0x378b5c.changeStateSlot = function (e) {
-        let slot;
-        if (_0x2593da && typeof _0x2593da.getCoreOptionsValue == "function") {
-          slot = _0x2593da.getCoreOptionsValue("save-state-slot");
-        }
-        if (!slot) {
-          slot = 1;
-        }
-        let newSlot;
-        if (typeof e != "number") {
-          newSlot = slot + 1;
-        } else {
-          newSlot = e;
-        }
-        if (newSlot > 9) {
-          newSlot = 1;
-        }
-        _0x7f9f36.updateCoreOptions.call(_this, "save-state-slot", newSlot);
-        _0x378b5c.doMessageTransition("SET SAVE STATE SLOT TO " + newSlot);
-      };
-      window.EJS_loadState = function (data) {
-        _0x378b5c.loadState(data, 0);
-        setTimeout(() => {
-          if (_0x378b5c.connected) {
-            var file = new File([data], "0-game.state", {
-              type: "",
-              lastModified: new Date(),
-            });
-            _0x378b5c.connection.shareFile(file);
-            _0x378b5c.inputsData = {};
-            _0x378b5c.wait = true;
-            _0x378b5c.systemPause(1);
-            _0x27f4c4.Module.pauseMainLoop();
-            _0x378b5c.disableControl(true);
-          }
-        }, 0x1e);
-      };
-      window.EJS_saveState = function () {
-        return _0x378b5c.saveState();
-      };
-      let _0x840cf4 = _0x27f4c4.Module.cwrap("cmd_take_screenshot", "", []);
-      _0x378b5c.getScreenData = function () {
-        _0x840cf4();
-        return _0x27f4c4.FS.readFile("screenshot.png");
-      };
-      _0x378b5c.restartGame = _0x27f4c4.Module.cwrap("system_restart", "", []);
-      _0x378b5c.currentFrameNum = _0x27f4c4.Module.cwrap(
-        "get_current_frame_count",
-        "",
-        []
-      );
-      _0x378b5c.saveSavFiles = _0x27f4c4.Module.cwrap("cmd_savefiles", "", []);
-      _0x27f4c4.Module._get_core_options &&
-        (_0x378b5c.getGameCoreOptions = _0x27f4c4.Module.cwrap(
-          "get_core_options",
-          "string",
-          []
-        ));
-      _0x378b5c.systemPause = function (e) {
-        return false;
-      };
-      _0x378b5c.controllers = _0x2593da.storage.get("controllers");
-      _0x378b5c.controllers ||
-        (_0x378b5c.controllers = JSON.parse(
-          JSON.stringify(_0x378b5c.defaultControllers)
-        ));
-    },
-  };
-  let _0xdcec2a = _0x378b5c;
+        let _0xdcec2a = _0x378b5c;
 
   function _0x5005e6(_0x7f3270, _0x477158) {
     return (
