@@ -1,16 +1,34 @@
 body {
   background-color: #282b30;
+  border: 3px solid blue;
+  border-radius: 16px;
+  max-width: 1120px;
+  min-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.ddcolortabs {
-  position: fixed; /* Make it stick/fixed */
-  top: 15; /* Stay on top */
-  width: auto; /* Full width */
-  transition: top 0.3s; /* Transition effect when sliding down (and up) */
-  font-family: Bold;
-  padding-left: auto;
-  padding-right: auto;
-  width: 16em;
+#ulinks {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: black;
+  width: auto;
+}
+
+#links {
+  float: left;
+  width: auto;
+}
+
+#links a {
+  width: auto;
+  display: block;
+  color: blue;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none; 
 }
 
 p {
@@ -18,156 +36,18 @@ p {
   max-width: 70%;
 }
 
+#credits{
+  color: white;
+}
+
+h1{
+  color: white;
+}
+
+h2{
+  color: white;
+}
+
 h3 {
   color: white;
-}
-
-.credits {
-  color: white;
-}
-
-.credits li {
-  padding-top: 10px;
-}
-
-.ddcolortabs ul {
-  font: normal 11px Arial, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ddcolortabs li {
-  display: inline;
-  margin: 0 2px 0 0;
-  padding: 0;
-  text-transform: uppercase;
-}
-
-.ddcolortabs a {
-  float: left;
-  font-size: 16px;
-  color: red;
-  background: black no-repeat left top;
-  margin: 0 2px 0 0;
-  padding: 0 0 1px 3px;
-  text-decoration: none;
-  letter-spacing: 1px;
-}
-
-.ddcolortabs a span {
-  float: left;
-  display: block;
-  background: transparent no-repeat right top;
-  padding: 4px 8px 2px 7px;
-}
-
-.ddcolortabs a span {
-  float: none;
-}
-
-.ddcolortabs a:hover {
-  background-color: #591f20;
-}
-
-.ddcolortabs a:hover span {
-  background-color: #591f20;
-}
-
-.ddcolortabs .selected a,
-#ddcolortabs .selected a span {
-  /*currently selected tab*/
-  background-color: #591f20;
-}
-
-.ddcolortabsline {
-  clear: both;
-  padding: 0;
-  width: 100%;
-  height: 8px;
-  line-height: 8px;
-  background: black;
-  border-top: 1px solid red; /*Remove this to remove border between bar and tabs*/
-}
-
-/* ######### Style for Drop Down Menu ######### */
-
-.dropmenudiv_a {
-  position: absolute;
-  top: 0;
-  border: 1px solid black; /*THEME CHANGE HERE*/
-  border-top-width: 8px; /*Top border width. Should match height of .ddcolortabsline above*/
-  border-bottom-width: 0;
-  font: normal 12px Arial;
-  line-height: 18px;
-  z-index: 100;
-  background-color: black;
-  width: 200px;
-  visibility: hidden;
-}
-
-.dropmenudiv_a a {
-  width: auto;
-  display: block;
-  text-indent: 5px;
-  border-top: 0 solid red;
-  border-bottom: 1px solid red; /*THEME CHANGE HERE*/
-  padding: 2px 0;
-  text-decoration: none;
-  color: red;
-}
-
-* html .dropmenudiv_a a {
-  /*IE only hack*/
-  width: 100%;
-}
-
-.dropmenudiv_a a:hover {
-  /*THEME CHANGE HERE*/
-  background-color: #8a3c3d;
-  color: black;
-}
-
-/* ######### Responsive CSS ######### */
-
-@media screen and (max-width: 480px) {
-  .ddcolortabs {
-    overflow: hidden;
-  }
-
-  .ddcolortabs li {
-    display: block !important;
-    width: 100%;
-    margin: 0;
-  }
-
-  .ddcolortabs li a {
-    display: block;
-    padding: 10px auto;
-    font-size: 120%;
-    margin-top: 3px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .ddcolortabsline {
-    display: none;
-  }
-
-  .dropmenudiv_a {
-    width: 100% !important;
-    display: none;
-    position: static;
-    border-top-width: 1px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .dropmenudiv_a a {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
 }
