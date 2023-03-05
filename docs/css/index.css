@@ -1,6 +1,6 @@
 body {
   background-color: #282b30;
-  border: 3px solid blue;
+  border: 3px solid #add8e6;
   border-radius: 16px;
   max-width: 1120px;
   min-width: 240px;
@@ -28,7 +28,7 @@ body {
   color: blue;
   text-align: center;
   padding: 14px 16px;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 p {
@@ -36,15 +36,15 @@ p {
   max-width: 70%;
 }
 
-#credits{
+#credits {
   color: white;
 }
 
-h1{
+h1 {
   color: white;
 }
 
-h2{
+h2 {
   color: white;
 }
 
