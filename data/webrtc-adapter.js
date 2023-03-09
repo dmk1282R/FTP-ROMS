@@ -8,7 +8,7 @@
     ("undefined" != typeof window
       ? window
       : "undefined" != typeof global
-      ? global
+      ? globalF
       : "undefined" != typeof self
       ? self
       : this
