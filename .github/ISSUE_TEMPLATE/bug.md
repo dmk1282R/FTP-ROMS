@@ -2,11 +2,9 @@
 name: Bug
 about: Something isn't functioning as intended
 title: "[Bug]"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
-
 
 #### Make sure your issue doesn't get closed! Make sure you have done the following items
 
@@ -16,7 +14,7 @@ assignees: ''
 - [ ] I have not attached any images or logs via external sites. I have uploaded them straight to GitHub and acknowledge that external sites may pose a security issue.
 - [ ] I have included, **IN DETAIL**, the steps to reproduce the bug.
 
-<!-- 
+<!--
 To collect a log of the console.
 1. Add the following line to your code
 ```

@@ -2794,8 +2794,8 @@ var EJS = (function (_0x574f5e) {
                 function D(t) {
                   return t != t;
                 }
-              }.call(this));
-            }.call(this, t("buffer").Buffer));
+              }).call(this);
+            }).call(this, t("buffer").Buffer);
           },
           { "base64-js": 2, buffer: 3, ieee754: 4 },
         ],
@@ -13514,7 +13514,7 @@ var EJS = (function (_0x574f5e) {
             });
         })(this);
       };
-    }.call(this, _0x2fa590(0x49).Buffer, _0x2fa590(0x1f), _0x2fa590(0x31)));
+    }).call(this, _0x2fa590(0x49).Buffer, _0x2fa590(0x1f), _0x2fa590(0x31));
   },
   window.EJS_main,
 ]).default;

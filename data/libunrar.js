@@ -16,7 +16,8 @@ if (ENVIRONMENT_IS_NODE) {
   if (!Module["print"])
     Module["print"] = function print(x) {
       process["stdout"].write(x + "\n");
-    };x
+    };
+  x;
   if (!Module["printErr"])
     Module["printErr"] = function printErr(x) {
       process["stderr"].write(x + "\n");
