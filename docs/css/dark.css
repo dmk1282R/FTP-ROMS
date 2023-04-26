@@ -1,16 +1,10 @@
 body {
   background-color: #282b30;
+  align-content: center;
 }
 
 a {
-  padding-left: 15px;
-  padding-top: 20px;
   color: blue;
-}
-
-span img {
-  width: 500;
-  height: 500;
 }
 
 #game {
